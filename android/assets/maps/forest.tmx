@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="70" height="1" tilewidth="352" tileheight="640">
+ <properties>
+  <property name="boundsY" value="0, 384"/>
+ </properties>
+ <tileset firstgid="1" name="bg_00" tilewidth="352" tileheight="640">
+  <image source="img/bg_00.png" width="1408" height="640"/>
+ </tileset>
+ <tileset firstgid="5" name="bg_01" tilewidth="352" tileheight="640">
+  <image source="img/bg_01.png" width="1408" height="640"/>
+ </tileset>
+ <tileset firstgid="9" name="bg_02" tilewidth="352" tileheight="640">
+  <image source="img/bg_02.png" width="1408" height="640"/>
+ </tileset>
+ <tileset firstgid="13" name="clouds_00" tilewidth="352" tileheight="640">
+  <image source="img/clouds_00.png" width="1408" height="640"/>
+ </tileset>
+ <tileset firstgid="17" name="clouds_01" tilewidth="352" tileheight="640">
+  <image source="img/clouds_01.png" width="1408" height="640"/>
+ </tileset>
+ <tileset firstgid="21" name="fbg_00" tilewidth="352" tileheight="640">
+  <image source="img/fbg_00.png" width="1408" height="640"/>
+ </tileset>
+ <tileset firstgid="25" name="fbg_01" tilewidth="352" tileheight="640">
+  <image source="img/fbg_01.png" width="1408" height="640"/>
+  <tile id="0">
+   <properties>
+    <property name="p" value="0, 0.1"/>
+    <property name="v" value="0,0"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="p" value="0, 0"/>
+    <property name="v" value="0.5, 1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="29" name="fbg_02" tilewidth="352" tileheight="640">
+  <image source="img/fbg_02.png" width="1408" height="640"/>
+ </tileset>
+ <tileset firstgid="33" name="fg_00" tilewidth="352" tileheight="640">
+  <image source="img/fg_00.png" width="1408" height="640"/>
+ </tileset>
+ <tileset firstgid="37" name="fg_01" tilewidth="352" tileheight="640">
+  <image source="img/fg_01.png" width="1408" height="640"/>
+ </tileset>
+ <tileset firstgid="41" name="GameLayer_03" tilewidth="352" tileheight="640">
+  <image source="img/GameLayer_03.png" width="1408" height="640"/>
+ </tileset>
+ <tileset firstgid="45" name="gl_00" tilewidth="352" tileheight="640">
+  <image source="img/gl_00.png" width="1408" height="640"/>
+ </tileset>
+ <tileset firstgid="49" name="gl_01" tilewidth="352" tileheight="640">
+  <image source="img/gl_01.png" width="1408" height="640"/>
+ </tileset>
+ <tileset firstgid="53" name="gl_02" tilewidth="352" tileheight="640">
+  <image source="img/gl_02.png" width="1408" height="640"/>
+ </tileset>
+ <tileset firstgid="57" name="gl_03" tilewidth="352" tileheight="640">
+  <image source="img/gl_03.png" width="1408" height="640"/>
+ </tileset>
+ <tileset firstgid="61" name="gl_04" tilewidth="352" tileheight="640">
+  <image source="img/gl_04.png" width="1408" height="640"/>
+ </tileset>
+ <layer name="bg_00" width="70" height="1">
+  <properties>
+   <property name="p" value="0, 0"/>
+   <property name="v" value="0, 1"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYAJiZiBmYRgFMAAAC7gACw==
+  </data>
+ </layer>
+ <layer name="bg_01" width="70" height="1">
+  <properties>
+   <property name="p" value="0, 0"/>
+   <property name="v" value="0.7, 1"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJx1zkEOgDAIRFEugVarbY/K0f2LkhCCi5dApkBVRA6caLhwo+Mpet3vYdQWc027fN5pse/FwMRKfazz7r9/eR5n/X51a7OcfcBsCLY=
+  </data>
+ </layer>
+ <layer name="bg_02" width="70" height="1">
+  <properties>
+   <property name="p" value="0, 0"/>
+   <property name="v" value="0.5, 1"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJyNjUkOgDAMA/2JUspSeGqezlQhEs2Jw0hxHDtF0uJYcSa9QoXQJ16HCw70Dhs094ydckfW3IqMyCr1Kf5VnycfrL9/vh0j19LtnfRfL3ofOFQSPg==
+  </data>
+ </layer>
+ <layer name="bg_gl" width="70" height="1">
+  <properties>
+   <property name="p" value="0, 0"/>
+   <property name="v" value="1, 1"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJydzUsOgCAMhOFeCMQHKMLh5uj+CWHDQg2Lb9FpM41mlnDiQhzmjBsFtWViJ27ErcjETtwot+y1b8WGHcePf+PewWNBmOj76u/zA67tEvY=
+  </data>
+ </layer>
+ <objectgroup draworder="topdown" name="enemies" width="70" height="1" visible="0">
+  <object name="Spider" type="Creature" x="1672" y="320">
+   <properties>
+    <property name="ap" value="1"/>
+    <property name="hp" value="1"/>
+    <property name="scale" value="0.5, 0.9"/>
+   </properties>
+  </object>
+  <object name="Spinne" type="Creature" x="1848" y="320">
+   <properties>
+    <property name="ap" value="1"/>
+    <property name="hp" value="1"/>
+    <property name="scale" value="0.5, 0.9"/>
+   </properties>
+  </object>
+  <object name="Wizzard" type="Creature" x="1848" y="320">
+   <properties>
+    <property name="ap" value="1"/>
+    <property name="hp" value="1"/>
+    <property name="scale" value="0.5, 0.9"/>
+   </properties>
+  </object>
+  <object name="Rabbit" type="Creature" x="2024" y="320">
+   <properties>
+    <property name="ap" value="1"/>
+    <property name="hp" value="1"/>
+    <property name="scale" value="0.5, 0.9"/>
+   </properties>
+  </object>
+  <object name="Goblin" type="Creature" x="2200" y="320">
+   <properties>
+    <property name="ap" value="1"/>
+    <property name="hp" value="1"/>
+    <property name="scale" value="0.5, 0.9"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

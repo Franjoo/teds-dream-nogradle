@@ -1,0 +1,200 @@
+lise.png
+size: 1002,1002
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+max_2.0
+  rotate: false
+  xy: 2, 2
+  size: 1000, 1000
+  orig: 1000, 1000
+  offset: 0, 0
+  index: -1
+
+lise.png
+size: 1019,1000
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+kopf_profil
+  rotate: false
+  xy: 2, 155
+  size: 261, 310
+  orig: 321, 311
+  offset: 25, 0
+  index: -1
+kopf_seitlich
+  rotate: false
+  xy: 730, 732
+  size: 276, 268
+  orig: 332, 272
+  offset: 13, 3
+  index: -1
+max_01
+  rotate: false
+  xy: 507, 389
+  size: 230, 134
+  orig: 301, 134
+  offset: 18, 0
+  index: -1
+max_02
+  rotate: false
+  xy: 321, 66
+  size: 29, 92
+  orig: 132, 161
+  offset: 52, 48
+  index: -1
+max_03
+  rotate: false
+  xy: 444, 708
+  size: 284, 292
+  orig: 362, 318
+  offset: 39, 0
+  index: -1
+max_04
+  rotate: false
+  xy: 2, 467
+  size: 282, 533
+  orig: 1000, 1000
+  offset: 356, 110
+  index: -1
+max_05
+  rotate: false
+  xy: 899, 344
+  size: 120, 145
+  orig: 1000, 1000
+  offset: 505, 491
+  index: -1
+max_06
+  rotate: true
+  xy: 739, 221
+  size: 124, 143
+  orig: 267, 285
+  offset: 81, 85
+  index: -1
+max_07
+  rotate: true
+  xy: 265, 160
+  size: 71, 86
+  orig: 256, 219
+  offset: 79, 102
+  index: -1
+max_08
+  rotate: false
+  xy: 251, 49
+  size: 68, 104
+  orig: 180, 190
+  offset: 64, 56
+  index: -1
+max_09
+  rotate: false
+  xy: 650, 152
+  size: 66, 113
+  orig: 207, 217
+  offset: 72, 77
+  index: -1
+max_10
+  rotate: true
+  xy: 718, 151
+  size: 68, 113
+  orig: 169, 143
+  offset: 61, 30
+  index: -1
+max_11
+  rotate: false
+  xy: 884, 199
+  size: 69, 143
+  orig: 214, 174
+  offset: 81, 24
+  index: -1
+max_12
+  rotate: false
+  xy: 955, 205
+  size: 55, 137
+  orig: 1000, 1000
+  offset: 538, 464
+  index: -1
+max_13
+  rotate: false
+  xy: 444, 525
+  size: 341, 181
+  orig: 475, 324
+  offset: 55, 78
+  index: -1
+max_14
+  rotate: false
+  xy: 2, 2
+  size: 247, 151
+  orig: 679, 460
+  offset: 167, 220
+  index: -1
+max_15
+  rotate: false
+  xy: 265, 233
+  size: 91, 232
+  orig: 227, 304
+  offset: 74, 39
+  index: -1
+max_16
+  rotate: false
+  xy: 358, 280
+  size: 147, 232
+  orig: 299, 314
+  offset: 114, 51
+  index: -1
+rennen bein_01
+  rotate: true
+  xy: 507, 267
+  size: 120, 158
+  orig: 1000, 1000
+  offset: 486, 268
+  index: -1
+rennen bein_02
+  rotate: false
+  xy: 787, 567
+  size: 210, 163
+  orig: 1000, 1000
+  offset: 387, 264
+  index: -1
+rennen bein_03
+  rotate: false
+  xy: 667, 305
+  size: 70, 82
+  orig: 1000, 1000
+  offset: 506, 266
+  index: -1
+rennen bein_04
+  rotate: true
+  xy: 787, 491
+  size: 74, 169
+  orig: 1000, 1000
+  offset: 508, 158
+  index: -1
+rennen bein_05
+  rotate: false
+  xy: 358, 164
+  size: 144, 114
+  orig: 1000, 1000
+  offset: 511, 95
+  index: -1
+rennen_neu_01
+  rotate: true
+  xy: 739, 347
+  size: 142, 158
+  orig: 233, 203
+  offset: 49, 29
+  index: -1
+schuh_vorne
+  rotate: false
+  xy: 504, 151
+  size: 144, 114
+  orig: 193, 135
+  offset: 26, 16
+  index: -1
+waffe_01
+  rotate: false
+  xy: 286, 514
+  size: 156, 486
+  orig: 347, 634
+  offset: 115, 75
+  index: -1
