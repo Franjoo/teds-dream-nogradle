@@ -24,6 +24,7 @@ import com.badlogic.gdx.Net;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.MathUtils;
@@ -47,10 +48,15 @@ public class GameController extends ScreenAdapter {
 
     private String mapname = Assets.MAP_FOREST;
 
+    private Texture tex_gameover = Assets.instance().get("ui/ingame/dreamover.png");
+    private float gameoverTimer;
+
+
     private GameInitialization gameInitialization;
 
     // projection
     private SpriteBatch batch;
+    private Color batchColor;
     private OrthographicCamera camera;
     private CameraHelper cameraHelper;
 
@@ -95,6 +101,8 @@ public class GameController extends ScreenAdapter {
         } catch (MapLayerParsingException e) {
             e.printStackTrace();
         }
+
+        batchColor = new Color(1, 1, 1, 1);
 
         playersRemotes = new HashMap<>();
         ui = new ControllerUI();
@@ -207,17 +215,19 @@ public class GameController extends ScreenAdapter {
 
         ui.update(delta);
 
+        player.update(delta);
+
         // update if not dead
-        if (!player.isDead()) {
-            player.update(delta);
-        }
+        if (player.isDead()) {
+            map.stopBackGroundSound();
+            Color c = batchColor;
+            batchColor.set(c.r - delta * 0.25f, c.g - delta * 0.25f, c.b - delta * 0.25f, 1);
 
-        // fade out
-        else {
-            Color c = player.getColor();
-            player.setColor(c.r, c.g, c.b, c.a - delta);
+            for (int i = 0; i < enemies.size; i++) {
+                Creature e = enemies.get(i);
+                enemies.get(i).setColor(batchColor.r, batchColor.g, batchColor.b, e.getColor().a - delta * 0.25f);
+            }
 
-            if (c.a <= 0) game.setScreen(game.mainMenu);
         }
 
 
@@ -236,6 +246,10 @@ public class GameController extends ScreenAdapter {
             if (!enemy.isDead()) {
                 enemy.updateAnimations(delta);
                 enemy.updatePosition(delta);
+
+                if (enemy.hasAttacked() && enemy.getSkeletonBounds().aabbIntersectsSkeleton(player.getSkeletonBounds())) {
+                    player.setDamage(enemy.getAP());
+                }
             }
 
             // fade out
@@ -256,7 +270,7 @@ public class GameController extends ScreenAdapter {
 
         // menu on player dead
         if (player.getHP() <= 0) {
-            game.setScreen(game.mainMenu);
+//            game.setScreen(game.mainMenu);
             map.stopBackGroundSound();
         }
 
@@ -280,9 +294,11 @@ public class GameController extends ScreenAdapter {
 
         batch.setProjectionMatrix(camera.combined);
 
-        map.renderBackground();
+        map.renderBackground(batchColor);
 
+        batch.setColor(batchColor);
         batch.begin();
+
 
         // draw gameobjects ordered
         helperArray.clear();
@@ -301,8 +317,23 @@ public class GameController extends ScreenAdapter {
         }
 
         batch.end();
+        batch.setColor(1, 1, 1, 1);
 
-        map.renderForeground();
+        map.renderForeground(batchColor);
+
+        // fade out
+        if (player.isDead()) {
+            gameoverTimer += delta;
+            if(gameoverTimer >= 5 && Gdx.input.isTouched()){
+                game.setScreen(game.mainMenu);
+                gameoverTimer = 0;
+            }
+
+            batch.begin();
+            batch.draw(tex_gameover, camera.position.x - tex_gameover.getWidth() / 2,
+                    camera.position.y - tex_gameover.getHeight() / 2);
+            batch.end();
+        }
 
 
         ui.render(batch);
@@ -315,8 +346,8 @@ public class GameController extends ScreenAdapter {
 
     }
 
-    public void playBackGroundSound(){
-       map.playBackGroundsound();
+    public void playBackGroundSound() {
+        map.playBackGroundsound();
     }
 
     HashMap<Integer, PlayerRemote> getPlayerRemotes() {

@@ -170,6 +170,12 @@ public class Player extends Creature {
         super.update(deltaTime);
         shadowHeight = getSkeletonBounds().getHeight();
         shadowWidth = getSkeletonBounds().getWidth();
+
+        if(isDead()){
+            input.setState(States.Animation.DEAD);
+            return;
+        }
+
         if (alive) {
             // set v in x and y direction
             velocityX = input.get_stickX() * deltaTime * velocityX_MAX;
@@ -231,6 +237,8 @@ public class Player extends Creature {
 
             updateEvent.set(id, x, y, input.getState(), skeleton.getFlipX());
         }
+
+
     }
 
 

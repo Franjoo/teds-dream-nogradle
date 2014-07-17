@@ -54,13 +54,9 @@ public class IntroScreen extends AbstractScreen {
         animationState3 = new AnimationState(animationStateData3);
         animationState3.setAnimation(0,"ende",false);
 
-
-
         // center position
         skeleton.getSkeleton().setX((Gdx.graphics.getWidth() / 2)+30);
         skeleton.getSkeleton().setY(0);
-
-
     }
 
     @Override
