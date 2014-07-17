@@ -22,6 +22,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -162,29 +163,41 @@ public class GameController extends ScreenAdapter {
                 // Spider
                 if (s.getCreatureType().equals(Spider.class.getSimpleName().toLowerCase())) {
                     enemies.add(new Spider((com.badlogic.gdx.graphics.g2d.TextureAtlas) Assets.instance().get("spine/spinne/spinne.atlas"),
-                            MathUtils.lerp(Spider.SCALE_MIN, Spider.SCALE_MAX, s.getScale()), s.getAp(), s.getHp(), s.getX(), s.getY()));
+                            MathUtils.lerp(Spider.SCALE_MIN, Spider.SCALE_MAX, s.getScale()), // scale
+                            MathUtils.lerp(Spider.AP_MIN, Spider.AP_MAX, s.getScale()), // ap
+                            MathUtils.lerp(Spider.HP_MIN, Spider.HP_MAX, s.getScale()), // hp
+                            s.getX(), s.getY()));
                 }
 
                 // Rabbit
                 else if (s.getCreatureType().equals(Rabbit.class.getSimpleName().toLowerCase())) {
                     enemies.add(new Rabbit((com.badlogic.gdx.graphics.g2d.TextureAtlas) Assets.instance().get("spine/hase/hase.atlas"),
-                            MathUtils.lerp(Rabbit.SCALE_MIN, Rabbit.SCALE_MAX, s.getScale()), s.getAp(), s.getHp(), s.getX(), s.getY()));
+                            MathUtils.lerp(Rabbit.SCALE_MIN, Rabbit.SCALE_MAX, s.getScale()), // scale
+                            MathUtils.lerp(Rabbit.AP_MIN, Rabbit.AP_MAX, s.getScale()), // ap
+                            MathUtils.lerp(Rabbit.HP_MIN, Rabbit.HP_MAX, s.getScale()), // hp
+                            s.getX(), s.getY()));
                 }
 
                 // Goblin
                 else if (s.getCreatureType().equals(Goblin.class.getSimpleName().toLowerCase())) {
                     enemies.add(new Goblin((com.badlogic.gdx.graphics.g2d.TextureAtlas) Assets.instance().get("spine/goblin/goblin.atlas"),
-                            MathUtils.lerp(Goblin.SCALE_MIN, Goblin.SCALE_MAX, s.getScale()), s.getAp(), s.getHp(), s.getX(), s.getY()));
+                            MathUtils.lerp(Goblin.SCALE_MIN, Goblin.SCALE_MAX, s.getScale()), // scale
+                            MathUtils.lerp(Goblin.AP_MIN, Goblin.AP_MAX, s.getScale()), // ap
+                            MathUtils.lerp(Goblin.HP_MIN, Goblin.HP_MAX, s.getScale()), // hp
+                            s.getX(), s.getY()));
                 }
 
                 // Wizzard
                 else if (s.getCreatureType().equals(Wizzard.class.getSimpleName().toLowerCase())) {
                     enemies.add(new Wizzard((com.badlogic.gdx.graphics.g2d.TextureAtlas) Assets.instance().get("spine/goblin/goblin.atlas"),
-                            MathUtils.lerp(Wizzard.SCALE_MIN, Wizzard.SCALE_MAX, s.getScale()), s.getAp(), s.getHp(), s.getX(), s.getY()));
+                            MathUtils.lerp(Wizzard.SCALE_MIN, Wizzard.SCALE_MAX, s.getScale()), // scale
+                            MathUtils.lerp(Wizzard.AP_MIN, Wizzard.AP_MAX, s.getScale()), // ap
+                            MathUtils.lerp(Wizzard.HP_MIN, Wizzard.HP_MAX, s.getScale()), // hp
+                            s.getX(), s.getY()));
                 }
-
-
             }
+
+
         }
     }
 
@@ -193,7 +206,20 @@ public class GameController extends ScreenAdapter {
 
         ui.update(delta);
 
-        player.update(delta);
+        // update if not dead
+        if (!player.isDead()) {
+            player.update(delta);
+        }
+
+        // fade out
+        else {
+            Color c = player.getColor();
+            player.setColor(c.r, c.g, c.b, c.a - delta);
+
+            if (c.a <= 0) game.setScreen(game.mainMenu);
+        }
+
+
         for (int i = 0; i <= playersRemotes.size(); i++) {
             if (playersRemotes.containsKey(i)) {
                 playersRemotes.get(i).getPlayer().remoteUpdate(delta);
@@ -203,7 +229,23 @@ public class GameController extends ScreenAdapter {
         map.update(delta);
 
         for (int i = 0; i < enemies.size; i++) {
-            enemies.get(i).update(delta);
+            Creature enemy = enemies.get(i);
+
+            // update if not dead
+            if (!enemy.isDead()) {
+                enemy.updateAnimations(delta);
+                enemy.updatePosition(delta);
+            }
+
+            // fade out
+            else {
+                Color c = enemy.getColor();
+                enemy.setColor(c.r, c.g, c.b, c.a - delta);
+
+                if (c.a <= 0) enemies.removeValue(enemy, true);
+            }
+
+
         }
 
         // camera

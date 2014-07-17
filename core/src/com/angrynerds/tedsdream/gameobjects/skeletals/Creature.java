@@ -1,8 +1,10 @@
 package com.angrynerds.tedsdream.gameobjects.skeletals;
 
 import com.angrynerds.tedsdream.Assets;
+import com.angrynerds.tedsdream.ai.statemachine.FSM;
 import com.angrynerds.tedsdream.map.Map;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,12 +18,14 @@ import com.esotericsoftware.spine.AnimationStateData;
  */
 public class Creature extends Skeletal {
 
+
     // Movement Constants
     public static enum Move {
         WALK, RUN, HIDE
     }
 
     // creature stats
+    protected FSM ai;
     protected float ap, hp;
     protected float apMax, hpMax;
 
@@ -76,14 +80,20 @@ public class Creature extends Skeletal {
         return state.getCurrent(0).getAnimation().getName();
     }
 
+    public boolean isDead() {
+        return state.getCurrent(0) == null;
+    }
+
     public void updateAnimations(float delta) {
         super.update(delta);
-        if(!shadowSizes){
-            shadowWidth = (int) skeletonBounds.getWidth() +150;
-            shadowHeight = (int) skeletonBounds.getHeight()/3;
+        if (!shadowSizes) {
+            shadowWidth = (int) skeletonBounds.getWidth() + 150;
+            shadowHeight = (int) skeletonBounds.getHeight() / 3;
             shadowSizes = true;
         }
 
+        // blood
+        bloodParticles.update(delta);
 
         // set flip
         skeleton.setFlipX(direction.x > 0);
@@ -93,26 +103,32 @@ public class Creature extends Skeletal {
         state.update(delta);
     }
 
+
     public void updatePosition(float delta) {
+        if (ai != null) {
+            ai.update(delta);
+        }
+
         x += direction.x * delta;
         y += direction.y * delta;
 
         // bounds
-        if(y > Map.getProperties().boundsY_max) y = Map.getProperties().boundsY_max;
-        else if(y < Map.getProperties().boundsY_min) y = Map.getProperties().boundsY_min;
+        if (y > Map.getProperties().boundsY_max) y = Map.getProperties().boundsY_max;
+        else if (y < Map.getProperties().boundsY_min) y = Map.getProperties().boundsY_min;
     }
 
     @Override
     public void update(float delta) {
-        updateAnimations(delta);
+
         updatePosition(delta);
-        bloodParticles.update(delta);
+        updateAnimations(delta);
+
     }
 
     @Override
     public void draw(SpriteBatch batch) {
         // batch.draw(tex_shadow, skeletonBounds.getMinX(), y - tex_shadow.getHeight()/2, skeletonBounds.getWidth(), skeletonBounds.getHeight()/2);
-        batch.draw(tex_shadow,x - shadowWidth/2, y - shadowHeight/2 - 10,shadowWidth,shadowHeight);
+        batch.draw(tex_shadow, x - shadowWidth / 2, y - shadowHeight / 2 - 10, shadowWidth, shadowHeight);
         // skeletal
         super.draw(batch);
         bloodParticles.draw(batch);
@@ -150,8 +166,23 @@ public class Creature extends Skeletal {
         return hpMax;
     }
 
+    public void setColor(Color color) {
+        skeleton.getColor().set(color);
+    }
+
+    public void setColor(float r, float g, float b, float a) {
+        skeleton.getColor().set(r, g, b, a);
+    }
+
+
+    public Color getColor() {
+        return skeleton.getColor();
+    }
+
     private void die() {
         setAnimation("die", false);
+        ai = null;
+        direction.set(0, 0);
     }
 
     public float getSpeed(Move speed) {
@@ -161,7 +192,7 @@ public class Creature extends Skeletal {
             case RUN:
                 return 160;
             case HIDE:
-                return 140;
+                return 320;
         }
 
         return 0;

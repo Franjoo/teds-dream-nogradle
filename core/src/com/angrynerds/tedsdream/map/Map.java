@@ -122,8 +122,8 @@ public class Map {
 
             // apply parallax offset
             Layer l = layers.get(i);
-            camera.position.x = camera.position.x * l.getVelocityX() + Gdx.graphics.getWidth() / 2;
-            camera.position.y = camera.position.y * l.getVelocityY();
+            camera.position.x = -l.getX() * Gdx.graphics.getWidth() + camera.position.x * l.getVelocityX() + Gdx.graphics.getWidth() / 2;
+            camera.position.y = -l.getY() * Gdx.graphics.getHeight() + camera.position.y * l.getVelocityY();
             camera.update();
 
             // apply view

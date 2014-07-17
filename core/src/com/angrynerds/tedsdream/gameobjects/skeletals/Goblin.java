@@ -18,8 +18,6 @@ public class Goblin extends Creature {
     public static final float AP_MAX = 30;
     public static final float AP_MIN = 8;
 
-    private FSM ai;
-
     private float scale; // relative to scale bounds
 
 
