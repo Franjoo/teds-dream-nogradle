@@ -1,5 +1,8 @@
 package com.angrynerds.tedsdream.gameobjects.skeletals;
 
+import com.angrynerds.tedsdream.Assets;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.spine.AnimationState;
@@ -23,6 +26,7 @@ public class Creature extends Skeletal {
     protected Vector2 direction = new Vector2();
 
     // animation
+    private Texture tex_shadow = Assets.instance().get("misc/shadow.png");
     protected AnimationStateData stateData;
     protected AnimationState state;
 
@@ -84,6 +88,15 @@ public class Creature extends Skeletal {
         updatePosition(delta);
     }
 
+    @Override
+    public void draw(SpriteBatch batch) {
+        // shadow
+        batch.draw(tex_shadow, skeletonBounds.getMinX(), y - tex_shadow.getHeight()/2, skeletonBounds.getWidth(), skeletonBounds.getHeight()/2);
+
+        // skeletal
+        super.draw(batch);
+    }
+
     public void moveInDirection(float dx, float dy, float speed) {
         direction.set(dx, dy).scl(speed);
     }
@@ -112,8 +125,8 @@ public class Creature extends Skeletal {
         return hpMax;
     }
 
-    private void die(){
-        setAnimation("die",false);
+    private void die() {
+        setAnimation("die", false);
     }
 
     public float getSpeed(Move speed) {
@@ -132,7 +145,6 @@ public class Creature extends Skeletal {
     public float getSize() {
         return scale;
     }
-
 
 
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.loaders.PixmapLoader;
 import com.badlogic.gdx.assets.loaders.TextureAtlasLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -58,6 +59,9 @@ public class Assets extends AssetManager{ // singleton
         // sounds
         load(DIR_SOUNDS + "ingame/lightsaber.mp3", Sound.class);
         load(DIR_SOUNDS + "ingame/dash.wav", Sound.class);
+
+        // misc
+        load("misc/shadow.png", Texture.class);
 
 
         // intro spine

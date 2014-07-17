@@ -147,11 +147,10 @@ public class GameController extends ScreenAdapter {
     }
 
     public void createObjects(GameInitialization init) {
-        System.out.println("spawn size: " + init.getSpawnArray().size);
 
         for (int i = 0; i < init.getSpawnArray().size; i++) {
             CreatureSpawn spawn = init.getSpawnArray().get(i);
-            if (spawn instanceof CreatureSpawn) {
+            if (spawn != null) {
                 CreatureSpawn s = spawn;
 
                 // Spider
