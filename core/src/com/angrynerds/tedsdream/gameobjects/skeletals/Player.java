@@ -7,6 +7,7 @@ import com.angrynerds.tedsdream.gameobjects.items.Item;
 import com.angrynerds.tedsdream.input.IGameInputController;
 import com.angrynerds.tedsdream.screens.GameController;
 import com.angrynerds.tedsdream.util.States;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -22,7 +23,6 @@ public class Player extends Creature {
     // player constants
     public static final float HP_MAX = 300;
     public static final float AP_MAX = 30;
-
 
     // movement
     private float z;
@@ -48,6 +48,8 @@ public class Player extends Creature {
     // sound_sword
     private Sound sound_sword = Assets.instance().get("sounds/ingame/lightsaber.mp3");
     private Sound sound_dash = Assets.instance().get("sounds/ingame/dash.wav");
+
+    private ParticleEffect runningParticles = new ParticleEffect();
 
     private boolean dashRight;
     private boolean alive = true;
@@ -81,6 +83,8 @@ public class Player extends Creature {
 
         setCurrentState();
 
+        runningParticles.load(Gdx.files.internal("particles/walkingDust.p"), Gdx.files.internal("particles"));
+
         updateEvent = new UpdatePlayerEvent();
     }
 
@@ -111,11 +115,13 @@ public class Player extends Creature {
 
         state = new AnimationState(stateData); // Holds the animation state for a skeleton (current animation, time, etc).
         state.setAnimation(0, "move", true);
+
     }
 
-
+    @Override
     public void draw(SpriteBatch batch) {
         super.draw(batch);
+        runningParticles.draw(batch);
     }
 
     public String getAnimation() {
@@ -132,6 +138,12 @@ public class Player extends Creature {
         }
         sound_sword.play();
         //actHP -= 50;
+    }
+
+    public void run(UpdatePlayerEvent e) {
+        setPosition(e.getX(), e.getY());
+        setState(e.getAnimationState());
+        setFlip(e.isFlip());
     }
 
     private void AddBloobParticlesForRender(ParticleEffect particle, float x, float y) {
@@ -157,8 +169,9 @@ public class Player extends Creature {
             // set v in x and y direction
             velocityX = input.get_stickX() * deltaTime * velocityX_MAX;
             velocityY = input.get_stickY() * deltaTime * velocityY_MAX;
-            if (velocityX != 0 && velocityY != 0 && input.getState() == States.Animation.IDLE)
+            if (velocityX != 0 && velocityY != 0 && input.getState() == States.Animation.IDLE) {
                 input.setState(States.Animation.RUN);
+            }
 
             if (alive) {
 
@@ -166,21 +179,31 @@ public class Player extends Creature {
                 // set v in x and y direction
                 velocityX = input.get_stickX() * deltaTime * velocityX_MAX;
                 velocityY = input.get_stickY() * deltaTime * velocityY_MAX;
-                if (velocityX != 0 && velocityY != 0 && input.getState() == States.Animation.IDLE)
+                if (velocityX != 0 && velocityY != 0 && input.getState() == States.Animation.IDLE) {
                     input.setState(States.Animation.RUN);
+                }
 
-                if (velocityX == 0 && velocityY == 0 && input.getState() == States.Animation.RUN)
+                if (velocityX == 0 && velocityY == 0 && input.getState() == States.Animation.RUN) {
                     input.setState(States.Animation.IDLE);
+                }
             }
 
 
-            if (velocityX == 0)
+            if (velocityX == 0) {
                 skeleton.setFlipX(flipped);
-            else
+            }
+            else {
                 skeleton.setFlipX(velocityX < 0);
+            }
 
+            runningParticles.setPosition(x-10, y);
             x += velocityX;
             y += velocityY;
+            if (runningParticles.isComplete() && input.getState() == States.Animation.RUN) {
+                runningParticles.start();
+            }
+
+            runningParticles.update(deltaTime);
 
             setCurrentState();
 
@@ -189,7 +212,6 @@ public class Player extends Creature {
 
 
             flipped = skeleton.getFlipX();
-
 
             state.update(deltaTime);
 

@@ -131,7 +131,6 @@ public class GameController extends ScreenAdapter {
             }
         }
 
-
         // camera
         cameraHelper = new CameraHelper();
         cameraHelper.applyTo(camera);
@@ -387,11 +386,7 @@ public class GameController extends ScreenAdapter {
                         UpdatePlayerEvent e = (UpdatePlayerEvent) event;
 
                         Player player = game.getPlayerRemotes().get((e.getId())).getPlayer();
-
-                        player.setPosition(e.getX(), e.getY());
-                        player.setState(e.getAnimationState());
-                        player.setFlip(e.isFlip());
-
+                        player.run(e);
                     }
 
                     // enemy initialization
