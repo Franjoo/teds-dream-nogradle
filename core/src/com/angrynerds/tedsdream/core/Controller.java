@@ -57,8 +57,6 @@ public class Controller extends Game {
 
         // set splash screen on game start
         this.setScreen(loadingScreen);
-
-
     }
 
     @Override
