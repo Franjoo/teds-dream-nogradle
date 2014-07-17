@@ -1,8 +1,10 @@
 package com.angrynerds.tedsdream.gameobjects.skeletals;
 
+import com.angrynerds.tedsdream.Assets;
 import com.angrynerds.tedsdream.ai.statemachine.Activities;
 import com.angrynerds.tedsdream.ai.statemachine.Activity;
 import com.angrynerds.tedsdream.ai.statemachine.FSM;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 /**
@@ -17,6 +19,9 @@ public class Goblin extends Creature {
     public static final float HP_MIN = 60;
     public static final float AP_MAX = 30;
     public static final float AP_MIN = 8;
+
+    private FSM ai;
+    private Sound sound;
 
     private float scale; // relative to scale bounds
 
@@ -71,6 +76,14 @@ public class Goblin extends Creature {
         super.update(deltaTime);
 
         ai.update(deltaTime);
+    }
+    @Override
+    public void playSound(String name){
+
+        sound = Assets.instance().get("sounds/ingame/creatures/goblin/" + name + ".mp3");
+        sound.play();
+
+
     }
 
     @Override

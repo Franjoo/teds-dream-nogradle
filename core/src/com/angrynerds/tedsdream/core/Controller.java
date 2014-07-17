@@ -44,7 +44,7 @@ public class Controller extends Game {
         loadingScreen = new LoadingScreen(this);
 //        introScreen = new IntroScreen(this);
         splashScreen = new SplashScreen(this);
-        mainMenu = new MainMenu(this);
+    //    mainMenu = new MainMenu(this);
 
 
         // create multiplayer screens

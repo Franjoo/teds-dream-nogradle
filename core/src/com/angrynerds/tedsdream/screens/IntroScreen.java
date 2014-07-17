@@ -62,7 +62,7 @@ public class IntroScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
 
-        if (animationState.getCurrent(0).isComplete()) {
+        if (animationState.getCurrent(0).isComplete() || Gdx.input.justTouched()) {
             setNextScreen();
         }
         // update state

@@ -54,12 +54,13 @@ public class Activities {
 
     private static void TriggerAnimation(Creature actor, String name) {
         if (!(actor.getCurrentAnimationName().equals(name))) {
+            TriggerSound(actor,name);
             actor.setAnimation(name, true);
         }
     }
 
     private static void TriggerSound (Creature actor, String name){
-
+          actor.playSound(name);
 
     }
 
@@ -259,6 +260,7 @@ public class Activities {
             if (player.getHP() > 0 && Distance(actor, player) < 30) {
                 TriggerAnimation(actor, "attack");
 
+
                 return false;
             }
 
@@ -285,6 +287,7 @@ public class Activities {
             Creature player = NearestPlayer(actor);
             if (actor.getHP() >= hpFearValue && player.getHP() > 0 && Distance(actor, player) < 30) {
                 TriggerAnimation(actor, "attack");
+
                 return false;
             }
 

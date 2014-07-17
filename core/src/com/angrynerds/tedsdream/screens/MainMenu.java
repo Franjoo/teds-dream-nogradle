@@ -4,6 +4,7 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenAccessor;
 import aurelienribon.tweenengine.TweenManager;
 import aurelienribon.tweenengine.equations.Sine;
+import com.angrynerds.tedsdream.Assets;
 import com.angrynerds.tedsdream.core.Controller;
 import com.angrynerds.tedsdream.tweens.MenuAccessor;
 import com.badlogic.gdx.Gdx;
@@ -54,9 +55,9 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
         this.game = game;
 
         // sound
-        sound_title = Gdx.audio.newSound(Gdx.files.internal("sounds/menus/titelmusik.wav"));
+        sound_title = Assets.instance().get("sounds/menus/titelmusik.wav");
         sound_title.setLooping(0, true);
-        sound_title.setVolume(0, 0);
+        sound_title.setVolume(100, 0);
 
         stage = new Stage();
         atlas = new TextureAtlas("ui/menus/main/mainMenuButton.pack");
@@ -178,11 +179,11 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
     public void show() {
         Gdx.input.setInputProcessor(stage);
 
+        sound_title.play();
         // play title music
 //        sound_title.play(volume);
 
         //todo sound ausfaden, problem: kein volume getter um TweenAccessor zu benutzen
-
 
         // add listener
         buttonPlay.addListener(listener);
@@ -192,7 +193,7 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
 
     @Override
     public void hide() {
-        sound_title.stop();
+        sound_title.pause();
 
         // remove listener
         buttonPlay.removeListener(listener);

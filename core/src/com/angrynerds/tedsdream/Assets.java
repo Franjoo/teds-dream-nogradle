@@ -100,6 +100,12 @@ public class Assets extends AssetManager{ // singleton
         load(DIR_SOUNDS + "ingame/ted/jump_02.mp3",Sound.class);
         load(DIR_SOUNDS + "ingame/ted/walk.wav",Sound.class);
         load(DIR_SOUNDS + "ingame/atmosphere/woods.mp3",Sound.class);
+        load(DIR_SOUNDS + "ingame/creatures/goblin/attack.mp3",Sound.class);
+        load(DIR_SOUNDS + "ingame/creatures/goblin/die.mp3",Sound.class);
+
+        //music
+        load(DIR_SOUNDS + "menus/titelmusik.wav",Sound.class);
+
 
 
 

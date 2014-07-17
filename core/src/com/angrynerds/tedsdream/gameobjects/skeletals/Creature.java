@@ -160,6 +160,10 @@ public class Creature extends Skeletal {
             die();
     }
 
+    public void playSound(String name){
+
+    }
+
     public float getHP() {
         return hp;
     }
