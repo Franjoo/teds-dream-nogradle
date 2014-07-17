@@ -33,6 +33,11 @@ public class Creature extends Skeletal {
     protected AnimationStateData stateData;
     protected AnimationState state;
 
+    //shadow
+    boolean shadowSizes = false;
+    private int shadowWidth;
+    private int shadowHeight;
+
     public Creature(TextureAtlas atlas, String path, float scale, String skin, float ap, float hp, float x, float y) {
         super(atlas, path, scale, skin, x, y);
 
@@ -72,6 +77,12 @@ public class Creature extends Skeletal {
 
     public void updateAnimations(float delta) {
         super.update(delta);
+        if(!shadowSizes){
+            shadowWidth = (int) skeletonBounds.getWidth() +150;
+            shadowHeight = (int) skeletonBounds.getHeight()/3;
+            shadowSizes = true;
+        }
+
 
         // set flip
         skeleton.setFlipX(direction.x > 0);
@@ -95,8 +106,8 @@ public class Creature extends Skeletal {
 
     @Override
     public void draw(SpriteBatch batch) {
-        // shadow
-        batch.draw(tex_shadow, skeletonBounds.getMinX(), y - tex_shadow.getHeight()/2, skeletonBounds.getWidth(), skeletonBounds.getHeight()/2);
+        // batch.draw(tex_shadow, skeletonBounds.getMinX(), y - tex_shadow.getHeight()/2, skeletonBounds.getWidth(), skeletonBounds.getHeight()/2);
+        batch.draw(tex_shadow,x - shadowWidth/2, y - shadowHeight/2 - 10,shadowWidth,shadowHeight);
         // skeletal
         super.draw(batch);
         bloodParticles.draw(batch);

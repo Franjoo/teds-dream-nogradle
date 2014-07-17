@@ -15,7 +15,7 @@ public class ShadowRenderer {
     Texture tex_shadow;
 
     public ShadowRenderer(){
-        tex_shadow = new Texture(Gdx.files.internal("test/shadow.png"));
+        tex_shadow = new Texture(Gdx.files.internal("misc/shadow.png"));
     }
 
 
