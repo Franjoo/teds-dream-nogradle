@@ -45,6 +45,7 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
     private static final int SOUND_TITLE = 0;
     private float volume;
     private Sound sound_title;
+    private long soundId;
 
     private InputListener listener;
 
@@ -178,8 +179,8 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
-
-        sound_title.play();
+      sound_title.setVolume(0,1);
+      soundId = sound_title.play();
         // play title music
 //        sound_title.play(volume);
 
@@ -193,8 +194,9 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
 
     @Override
     public void hide() {
+        sound_title.setVolume(0,1f);
 
-        SoundFader s = new SoundFader(sound_title);
+        SoundFader s = new SoundFader(soundId);
         s.start();
 
         //sound_title.pause();
@@ -236,15 +238,16 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
 
     class SoundFader extends Thread {
 
-        Sound s;
-        public SoundFader(Sound s){
-             this.s=s;
+          long id;
+        public SoundFader(long id){
+             this.id=id;
         }
         @Override
         public void run() {
             for (float i = 1; i > 0 ; i-=0.002f) {
-                s.setVolume(0, i );
-                if(i <= 0 )s.stop();
+
+              sound_title.setVolume(id, i );
+
                 try {
                     this.sleep(20);
                 } catch (InterruptedException e) {
@@ -252,6 +255,7 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
                 }
 
             }
+            sound_title.stop();
 
 
         }
