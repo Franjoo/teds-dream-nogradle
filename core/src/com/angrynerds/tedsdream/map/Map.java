@@ -1,8 +1,10 @@
 package com.angrynerds.tedsdream.map;
 
+import com.angrynerds.tedsdream.Assets;
 import com.angrynerds.tedsdream.Layer;
 import com.angrynerds.tedsdream.errors.MapLayerParsingException;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapProperties;
@@ -21,6 +23,9 @@ public class Map {
 
     Vector3 vec3 = new Vector3();
 
+    private Sound backgroundSound;
+    private String mapName = "woods";
+
     private OrthogonalTiledMapRenderer renderer;
     private Array<Layer> layers_foreground = new Array<>();
     private Array<Layer> layers_background = new Array<>();
@@ -37,8 +42,12 @@ public class Map {
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
         renderer.setView(camera);
 
+        backgroundSound = Assets.instance().get("sounds/ingame/atmosphere/" + mapName + ".mp3");
+
+
         createMapLayers();
     }
+
 
     private void createMapLayers() throws MapLayerParsingException {
         for (int i = 0; i < tiledMap.getLayers().getCount(); i++) {
@@ -142,6 +151,15 @@ public class Map {
 
     public static Properties getProperties() {
         return properties;
+    }
+
+    public void playBackGroundsound() {
+
+        backgroundSound.loop();
+    }
+
+    public void stopBackGroundSound(){
+        backgroundSound.stop();
     }
 
     public static class Properties {

@@ -118,8 +118,8 @@ public class MainMenu  implements Screen, TweenAccessor<Sound> {
                         @Override
                         public void run() {
                             game.setScreen(new IntroScreen(game));
-                            System.out.println("play pressed");
-                        }
+
+                                                   }
                     });
 
 
