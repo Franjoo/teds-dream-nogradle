@@ -6,6 +6,7 @@ import com.angrynerds.tedsdream.ai.statemachine.Activity;
 import com.angrynerds.tedsdream.ai.statemachine.FSM;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector3;
 
 /**
  * Author: Franz Benthin
@@ -33,6 +34,7 @@ public class Goblin extends Creature {
         createAI();
 
         mixAnimations();
+
     }
 
     public static Goblin create(TextureAtlas atlas) {
@@ -79,8 +81,8 @@ public class Goblin extends Creature {
     @Override
     public void playSound(String name){
 
-        sound = Assets.instance().get("sounds/ingame/creatures/goblin/" + name + ".mp3");
-        sound.play();
+//        sound = Assets.instance().get("sounds/ingame/creatures/goblin/" + name + ".mp3");
+//        sound.play();
 
 
     }
