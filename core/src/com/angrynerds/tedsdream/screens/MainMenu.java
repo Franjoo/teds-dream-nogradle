@@ -193,8 +193,11 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
 
     @Override
     public void hide() {
-        sound_title.pause();
 
+        SoundFader s = new SoundFader(sound_title);
+        s.start();
+
+        //sound_title.pause();
         // remove listener
         buttonPlay.removeListener(listener);
         buttonSettings.removeListener(listener);
@@ -229,6 +232,28 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
     @Override
     public void setValues(Sound target, int tweenType, float[] newValues) {
         //To change body of implemented methods use File | Settings | File Templates.
+            }
+
+    class SoundFader extends Thread {
+
+        Sound s;
+        public SoundFader(Sound s){
+             this.s=s;
+        }
+        @Override
+        public void run() {
+            for (float i = 1; i > 0 ; i-=0.002f) {
+              s.setVolume(0, i );
+                try {
+                    this.sleep(20);
+                    System.out.println(i);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        }
     }
 
 
