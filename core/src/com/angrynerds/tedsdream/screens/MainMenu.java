@@ -244,12 +244,14 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
         public void run() {
             for (float i = 1; i > 0 ; i-=0.002f) {
               s.setVolume(0, i );
+                if(i <= 0 )s.stop();
                 try {
                     this.sleep(20);
                     System.out.println(i);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
             }
 
 
