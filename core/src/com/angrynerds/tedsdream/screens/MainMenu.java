@@ -245,16 +245,17 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
         @Override
         public void run() {
             for (float i = 1; i > 0 ; i-=0.002f) {
-              sound_title.setVolume(id, i );
 
+              sound_title.setVolume(id, i );
 
                 try {
                     this.sleep(20);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
             }
-            sound_title.pause();
+            sound_title.stop();
 
 
         }
