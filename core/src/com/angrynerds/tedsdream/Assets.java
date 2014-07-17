@@ -26,6 +26,7 @@ public class Assets extends AssetManager{ // singleton
     private static final String DIR_MAPS = "maps/";
     private static final String DIR_UI = "ui/";
     private static final String DIR_SOUNDS = "sounds/";
+    private static final String DIR_SEQUENZES = "sequenzes/";
 
     private HashMap<String, ?> assets;
 
@@ -33,38 +34,22 @@ public class Assets extends AssetManager{ // singleton
 
     private Assets() {
 
-        TmxMapLoader mapLoader = new TmxMapLoader(new InternalFileHandleResolver());
         assets = new HashMap<>();
+
 
         // ui elements
         setLoader(TextureAtlas.class, new TextureAtlasLoader(new InternalFileHandleResolver()));
         load(DIR_UI + "loading_screen/loadingscreen.pack", TextureAtlas.class);
+
+
+
         finishLoading(); // needed for loading screen
 
-        // tiled maps
-        setLoader(TiledMap.class, mapLoader);
-        load(DIR_MAPS + "forest.tmx", TiledMap.class);
-
-        // creatures
-        setLoader(TextureAtlas.class, new TextureAtlasLoader(new InternalFileHandleResolver()));
-
-        load(DIR_SPINE + "ted/ted.atlas", TextureAtlas.class);
-        load(DIR_SPINE + "lise/lise.atlas", TextureAtlas.class);
-
-        load(DIR_SPINE + "spinne/spinne.atlas", TextureAtlas.class);
-        load(DIR_SPINE + "hase/hase.atlas", TextureAtlas.class);
-        load(DIR_SPINE + "goblin/goblin.atlas", TextureAtlas.class);
-
-
-        // sounds
-        load(DIR_SOUNDS + "ingame/lightsaber.mp3", Sound.class);
-        load(DIR_SOUNDS + "ingame/dash.wav", Sound.class);
-
-        // misc
-        load("misc/shadow.png", Texture.class);
 
 
         // intro spine
+        // sequenzes
+
 //
 //        manager.load(dir_spine + "intro/Sequenz1_start/sequenz_1.atlas", TextureAtlas.class);
 //
@@ -81,6 +66,39 @@ public class Assets extends AssetManager{ // singleton
 //        }
 
 
+    }
+
+    public void loadAssets() {
+
+        TmxMapLoader mapLoader = new TmxMapLoader(new InternalFileHandleResolver());
+
+        setLoader(TextureAtlas.class, new TextureAtlasLoader(new InternalFileHandleResolver()));
+        load(DIR_SEQUENZES + "intro/Sequenz1_start/sequenz_1.atlas",TextureAtlas.class);
+        load(DIR_SEQUENZES + "intro/Sequenz2_mittel/sequenz_2.atlas",TextureAtlas.class);
+        load(DIR_SEQUENZES + "intro/Sequenz3_ende/sequenz_3.atlas",TextureAtlas.class);
+
+        // tiled maps
+        setLoader(TiledMap.class, mapLoader);
+        load(DIR_MAPS + "forest.tmx", TiledMap.class);
+
+        // creatures
+        setLoader(TextureAtlas.class, new TextureAtlasLoader(new InternalFileHandleResolver()));
+
+
+        load(DIR_SPINE + "ted/ted.atlas", TextureAtlas.class);
+        load(DIR_SPINE + "lise/lise.atlas", TextureAtlas.class);
+
+        load(DIR_SPINE + "spinne/spinne.atlas", TextureAtlas.class);
+        load(DIR_SPINE + "hase/hase.atlas", TextureAtlas.class);
+        load(DIR_SPINE + "goblin/goblin.atlas", TextureAtlas.class);
+
+
+        // sounds
+        load(DIR_SOUNDS + "ingame/lightsaber.mp3", Sound.class);
+        load(DIR_SOUNDS + "ingame/dash.wav", Sound.class);
+
+        // misc
+        load("misc/shadow.png", Texture.class);
     }
 
     @Override

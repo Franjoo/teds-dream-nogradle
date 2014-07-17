@@ -24,7 +24,7 @@ public class Controller extends Game {
     public AbstractScreen loadingScreen;
     public GameController playScreen;
     public MainMenu mainMenu;
-    public Screen introScreen;
+    public AbstractScreen introScreen;
     public AbstractScreen splashScreen;
 
     // multiplayer sceens
@@ -42,9 +42,10 @@ public class Controller extends Game {
 
         // create screens
         loadingScreen = new LoadingScreen(this);
+//        introScreen = new IntroScreen(this);
         splashScreen = new SplashScreen(this);
         mainMenu = new MainMenu(this);
-        introScreen = new IntroScreen(this);
+
 
         // create multiplayer screens
         multiplayer_choose = new MultiplayerChooseMenu(this);
@@ -57,8 +58,6 @@ public class Controller extends Game {
 
         // set splash screen on game start
         this.setScreen(loadingScreen);
-
-
     }
 
     @Override

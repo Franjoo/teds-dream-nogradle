@@ -3,7 +3,7 @@ package com.angrynerds.tedsdream.screens;
 import com.angrynerds.tedsdream.Assets;
 import com.angrynerds.tedsdream.core.Controller;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
+//import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -30,7 +30,7 @@ public class LoadingScreen extends AbstractScreen {
 
     private Controller game;
 
-    private AssetManager manager;
+    private Assets manager;
 
     public LoadingScreen(Controller game) {
         this.game = game;
@@ -43,7 +43,7 @@ public class LoadingScreen extends AbstractScreen {
         manager.load("ui/loading_screen/loadingscreen.pack", TextureAtlas.class);
 
         // Wait until they are finished loading
-        manager.finishLoading();
+       manager.finishLoading();
 
         stage = new Stage();
 
@@ -61,8 +61,9 @@ public class LoadingScreen extends AbstractScreen {
         stage.addActor(loadingBar);
 
         // Add everything to be loaded, for instance:
-        manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-       // manager.load(Map.mapPath, TiledMap.class);
+//        manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+        manager.loadAssets();
+//       manager.load(Map.mapPath, TiledMap.class);
     }
 
     @Override
