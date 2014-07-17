@@ -11,6 +11,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.spine.AnimationState;
 import com.esotericsoftware.spine.AnimationStateData;
@@ -66,7 +67,7 @@ public class Player extends Creature {
     private int id = -1;
 
     public Player(IGameInputController input, GameController game) {
-        super(Assets.instance().get("spine/lise/lise.atlas"), "spine/lise/lise", 0.20f, AP_MAX, HP_MAX);
+        super((TextureAtlas) Assets.instance().get("spine/lise/lise.atlas"), "spine/lise/lise", 0.20f, AP_MAX, HP_MAX);
 //        super(Assets.instance().get("spine/ted/ted.atlas"), "spine/ted/ted", 0.20f, AP_MAX, HP_MAX);
         this.input = input;
         this.game = game;

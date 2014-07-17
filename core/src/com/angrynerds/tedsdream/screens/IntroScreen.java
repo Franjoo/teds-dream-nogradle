@@ -4,13 +4,10 @@ import com.angrynerds.tedsdream.Assets;
 import com.angrynerds.tedsdream.core.Controller;
 import com.angrynerds.tedsdream.gameobjects.skeletals.Skeletal;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.esotericsoftware.spine.AnimationState;
 import com.esotericsoftware.spine.AnimationStateData;
-
-import java.util.ArrayList;
 
 /**
  * Author: Franz Benthin
@@ -41,9 +38,9 @@ public class IntroScreen extends AbstractScreen {
 
         batch = new SpriteBatch();
 
-        skeleton = new Skeletal( Assets.instance().get("sequenzes/intro/Sequenz1_start/sequenz_1.atlas"),"sequenzes/intro/Sequenz1_start/sequenz_1",1.1f);
-        animation2 = new Skeletal( Assets.instance().get("sequenzes/intro/Sequenz2_mittel/sequenz_2.atlas"),"sequenzes/intro/Sequenz2_mittel/sequenz_2",2.5f);
-        animation3 = new Skeletal( Assets.instance().get("sequenzes/intro/Sequenz3_ende/sequenz_3.atlas"),"sequenzes/intro/Sequenz3_ende/sequenz_3",1.5f);
+        skeleton = new Skeletal((TextureAtlas) Assets.instance().get("sequenzes/intro/Sequenz1_start/sequenz_1.atlas"),"sequenzes/intro/Sequenz1_start/sequenz_1",1.1f);
+        animation2 = new Skeletal((TextureAtlas) Assets.instance().get("sequenzes/intro/Sequenz2_mittel/sequenz_2.atlas"),"sequenzes/intro/Sequenz2_mittel/sequenz_2",2.5f);
+        animation3 = new Skeletal((TextureAtlas) Assets.instance().get("sequenzes/intro/Sequenz3_ende/sequenz_3.atlas"),"sequenzes/intro/Sequenz3_ende/sequenz_3",1.5f);
 
         AnimationStateData animationStateData1 = new AnimationStateData(skeleton.getSkeletonData());
         AnimationStateData animationStateData2 = new AnimationStateData(animation2.getSkeletonData());

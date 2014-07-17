@@ -84,8 +84,9 @@ public class ServerLobby implements Screen {
                 if (e.getTarget().getParent() == btn_start) {
                     System.out.println("start pressed");
 //                    _this.game.server.startGame();
-                    _this.game.nextScreen = _this.game.playScreen;
-                    _this.game.setScreen(_this.game.introScreen);
+//                    _this.game.nextScreen = _this.game.playScreen;
+//                    _this.game.setScreen(_this.game.introScreen);
+                    _this.game.setScreen(_this.game.playScreen);
                     return true;
                 }
 

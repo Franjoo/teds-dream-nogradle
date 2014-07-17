@@ -24,6 +24,7 @@ import com.badlogic.gdx.Net;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.net.Socket;
 import com.badlogic.gdx.net.SocketHints;
@@ -88,7 +89,7 @@ public class GameController extends ScreenAdapter {
         camera = new OrthographicCamera(C.VIEWPORT_WIDTH, C.VIEWPORT_HEIGHT);
 
         try {
-            map = new Map(camera, Assets.instance().get(mapname));
+            map = new Map(camera, (TiledMap) Assets.instance().get(mapname));
         } catch (MapLayerParsingException e) {
             e.printStackTrace();
         }
@@ -126,7 +127,7 @@ public class GameController extends ScreenAdapter {
         // create gameobjects
         if (this.isServer || !this.isMultiplayer) {
             try {
-                gameInitialization = new GameInitialization(Assets.instance().get(mapname), game.difficulty);
+                gameInitialization = new GameInitialization((TiledMap) Assets.instance().get(mapname), game.difficulty);
                 createObjects(gameInitialization);
             } catch (CreatureParsingException e) {
                 e.printStackTrace();
@@ -140,12 +141,16 @@ public class GameController extends ScreenAdapter {
 
         // Y sorting comparator
         helperArray = new Array<>();
-        comparatorY = (o1, o2) -> {
-            if (o1.getY() < o2.getY()) return 1;
-            else if (o1.getY() > o2.getY()) return -1;
-            return 0;
+        comparatorY = new Comparator<GameObject>() {
+            @Override
+            public int compare(GameObject o1, GameObject o2) {
+                if (o1.getY() < o2.getY()) return 1;
+                else if (o1.getY() > o2.getY()) return -1;
+                return 0;
+            }
         };
     }
+
 
     public void createObjects(GameInitialization init) {
 
@@ -156,25 +161,25 @@ public class GameController extends ScreenAdapter {
 
                 // Spider
                 if (s.getCreatureType().equals(Spider.class.getSimpleName().toLowerCase())) {
-                    enemies.add(new Spider(Assets.instance().get("spine/spinne/spinne.atlas"),
+                    enemies.add(new Spider((com.badlogic.gdx.graphics.g2d.TextureAtlas) Assets.instance().get("spine/spinne/spinne.atlas"),
                             MathUtils.lerp(Spider.SCALE_MIN, Spider.SCALE_MAX, s.getScale()), s.getAp(), s.getHp(), s.getX(), s.getY()));
                 }
 
                 // Rabbit
                 else if (s.getCreatureType().equals(Rabbit.class.getSimpleName().toLowerCase())) {
-                    enemies.add(new Rabbit(Assets.instance().get("spine/hase/hase.atlas"),
+                    enemies.add(new Rabbit((com.badlogic.gdx.graphics.g2d.TextureAtlas) Assets.instance().get("spine/hase/hase.atlas"),
                             MathUtils.lerp(Rabbit.SCALE_MIN, Rabbit.SCALE_MAX, s.getScale()), s.getAp(), s.getHp(), s.getX(), s.getY()));
                 }
 
                 // Goblin
                 else if (s.getCreatureType().equals(Goblin.class.getSimpleName().toLowerCase())) {
-                    enemies.add(new Goblin(Assets.instance().get("spine/goblin/goblin.atlas"),
+                    enemies.add(new Goblin((com.badlogic.gdx.graphics.g2d.TextureAtlas) Assets.instance().get("spine/goblin/goblin.atlas"),
                             MathUtils.lerp(Goblin.SCALE_MIN, Goblin.SCALE_MAX, s.getScale()), s.getAp(), s.getHp(), s.getX(), s.getY()));
                 }
 
                 // Wizzard
                 else if (s.getCreatureType().equals(Wizzard.class.getSimpleName().toLowerCase())) {
-                    enemies.add(new Wizzard(Assets.instance().get("spine/goblin/goblin.atlas"),
+                    enemies.add(new Wizzard((com.badlogic.gdx.graphics.g2d.TextureAtlas) Assets.instance().get("spine/goblin/goblin.atlas"),
                             MathUtils.lerp(Wizzard.SCALE_MIN, Wizzard.SCALE_MAX, s.getScale()), s.getAp(), s.getHp(), s.getX(), s.getY()));
                 }
 
@@ -306,7 +311,17 @@ public class GameController extends ScreenAdapter {
         stringBuilder.delete(0, stringBuilder.length());
         stringBuilder.append("Player ").append(player.getID()).append(" ( ME ) \n");
 
-        playersRemotes.forEach((integer, playerRemote) -> stringBuilder.append("Player ").append(integer).append("\n"));
+        for (int i = 0; i < playersRemotes.size(); i++) {
+//            stringBuilder.append("Player ").append(playersRemotes.get(i).getPlayer().getID()).append("\n");
+            stringBuilder.append("Player ").append("bla").append("\n");
+        }
+//
+//        playersRemotes.forEach(new BiConsumer<Integer, PlayerRemote>() {
+//            @Override
+//            public void accept(Integer integer, PlayerRemote playerRemote) {
+//                stringBuilder.append("Player ").append(integer).append("\n");
+//            }
+//        });
 
 
         clientNames = stringBuilder.toString();
@@ -365,7 +380,12 @@ public class GameController extends ScreenAdapter {
 
                     // add new player
                     else if (event instanceof AddPlayerEvent) {
-                        Gdx.app.postRunnable(() -> game.addPlayer(((AddPlayerEvent) event).getId()));
+                        Gdx.app.postRunnable(new Runnable() {
+                            @Override
+                            public void run() {
+                                game.addPlayer(((AddPlayerEvent) event).getId());
+                            }
+                        });
 
                         if (isServer) {
                             try {
@@ -394,7 +414,12 @@ public class GameController extends ScreenAdapter {
 
                         Json json = new Json();
                         final GameInitialization initialization = json.fromJson(GameInitialization.class, ((GameInitializationEvent) event).getSerialization());
-                        Gdx.app.postRunnable(() -> createObjects(initialization));
+                        Gdx.app.postRunnable(new Runnable() {
+                            @Override
+                            public void run() {
+                                createObjects(initialization);
+                            }
+                        });
 
                     }
 
