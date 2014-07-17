@@ -207,19 +207,15 @@ public class Player extends Creature {
 
             setCurrentState();
 
-
             checkForNextToItem();
-
 
             flipped = skeleton.getFlipX();
 
             state.update(deltaTime);
 
-
             state.apply(skeleton);
 
             updateEvent.set(id, x, y, input.getState(), skeleton.getFlipX());
-
         }
     }
 
@@ -307,7 +303,6 @@ public class Player extends Creature {
         this.y = y;
     }
 
-
     public IGameInputController getInput() {
         return input;
     }
@@ -323,7 +318,6 @@ public class Player extends Creature {
     public void setFlip(boolean flip) {
         skeleton.setFlipX(flip);
     }
-
 
     public int getID() {
         return id;

@@ -1,6 +1,7 @@
 package com.angrynerds.tedsdream.gameobjects.skeletals;
 
 import com.angrynerds.tedsdream.Assets;
+import com.angrynerds.tedsdream.map.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
@@ -95,6 +96,10 @@ public class Creature extends Skeletal {
     public void updatePosition(float delta) {
         x += direction.x * delta;
         y += direction.y * delta;
+
+        // bounds
+        if(y > Map.getProperties().boundsY_max) y = Map.getProperties().boundsY_max;
+        else if(y < Map.getProperties().boundsY_min) y = Map.getProperties().boundsY_min;
     }
 
     @Override

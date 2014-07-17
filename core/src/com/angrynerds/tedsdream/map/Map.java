@@ -153,6 +153,8 @@ public class Map {
         public final int tileHeight;
         public final int mapWidth;
         public final int mapHeight;
+        public final int boundsY_max;
+        public final int boundsY_min;
 
         public Properties(TiledMap tiledMap) {
             // parse map properties
@@ -160,6 +162,9 @@ public class Map {
             numTilesY = Integer.parseInt(tiledMap.getProperties().get("height").toString());
             tileWidth = Integer.parseInt(tiledMap.getProperties().get("tilewidth").toString());
             tileHeight = Integer.parseInt(tiledMap.getProperties().get("tileheight").toString());
+            String[] bounds = tiledMap.getProperties().get("boundsY").toString().trim().split(",");
+            boundsY_min = Integer.parseInt(bounds[0]);
+            boundsY_max = Integer.parseInt(bounds[1]);
             mapWidth = numTilesX * tileWidth;
             mapHeight = numTilesY * tileHeight;
         }

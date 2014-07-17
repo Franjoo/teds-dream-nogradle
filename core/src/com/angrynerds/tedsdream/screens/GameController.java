@@ -102,6 +102,7 @@ public class GameController extends ScreenAdapter {
             listener = ui.getListener();
         } else {
             listener = new KeyboardInput();
+//            listener = ui.getListener();
         }
 
         // create Activities for AI
@@ -115,6 +116,7 @@ public class GameController extends ScreenAdapter {
         // add player
         player = new Player(listener, this);
         players.add(player);
+        ui.setPlayer(player);
 
         // server game settings
         if (this.isMultiplayer) {
@@ -184,11 +186,7 @@ public class GameController extends ScreenAdapter {
 
     public void update(float delta) {
 
-
-        if (Gdx.app.getType() == Application.ApplicationType.Android) {
-            ui.update(delta);
-
-        }
+        ui.update(delta);
 
         player.update(delta);
         for (int i = 0; i <= playersRemotes.size(); i++) {
@@ -257,9 +255,7 @@ public class GameController extends ScreenAdapter {
 
         map.renderForeground();
 
-        if (Gdx.app.getType() == Application.ApplicationType.Android) {
-            ui.render(delta);
-        }
+        ui.render(batch);
 
         handleDebug(delta);
 
