@@ -13,10 +13,10 @@ public class Wizzard extends Creature {
     // CREATURE TYPE CONSTANTS
     public static final float SCALE_MAX = 0.15f;
     public static final float SCALE_MIN = 0.08f;
-    public static final float HP_MAX = 125;
+    public static final float HP_MAX = 60;
     public static final float HP_MIN = 60;
-    public static final float AP_MAX = 30;
-    public static final float AP_MIN = 8;
+    public static final float AP_MAX = 50;
+    public static final float AP_MIN = 25;
 
     private float scale; // relative to scale bounds
 

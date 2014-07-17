@@ -54,7 +54,7 @@ public class Activities {
 
     private static void TriggerAnimation(Creature actor, String name) {
         if (!(actor.getCurrentAnimationName().equals(name))) {
-            TriggerSound(actor,name);
+           // TriggerSound(actor,name);
             actor.setAnimation(name, true);
         }
     }

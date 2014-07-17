@@ -23,7 +23,7 @@ public class Player extends Creature {
 
     // player constants
     public static final float HP_MAX = 300;
-    public static final float AP_MAX = 30;
+    public static final float AP_MAX = 15;
 
     // movement
     private float z;
@@ -137,7 +137,7 @@ public class Player extends Creature {
         for (Creature e : game.getEnemies()) {
             if (e.getSkeletonBounds().aabbIntersectsSkeleton(getSkeletonBounds())) {
 //                AddBloobParticlesForRender(e.getBloodParticle(), e.getX(), e.getY());
-                e.setDamage(atckDmg);
+                e.setDamage(AP_MAX);
                 System.out.println("atccking enemy " + e.getHP());
             }
         }

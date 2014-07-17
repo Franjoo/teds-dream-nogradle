@@ -13,9 +13,9 @@ public class Rabbit extends Creature {
     // CREATURE TYPE CONSTANTS
     public static final float SCALE_MAX = 0.15f;
     public static final float SCALE_MIN = 0.08f;
-    public static final float HP_MAX = 125;
+    public static final float HP_MAX = 90;
     public static final float HP_MIN = 60;
-    public static final float AP_MAX = 30;
+    public static final float AP_MAX = 15;
     public static final float AP_MIN = 8;
 
     private float scale; // relative to scale bounds
