@@ -18,12 +18,10 @@ public class Spider extends Creature {
     public static final float AP_MAX = 30;
     public static final float AP_MIN = 8;
 
-    private FSM ai;
-
     private float scale; // relative to scale bounds
 
     public Spider(TextureAtlas atlas, float scale, float ap, float hp, float x, float y) {
-        super(atlas, "spine/spinne/spinne", scale, null, ap, hp, x, y);
+        super(atlas, "spine/spinne/spinne", scale, null, scale, hp, x, y);
 
         this.scale = scale / SCALE_MAX;
 
@@ -65,19 +63,6 @@ public class Spider extends Creature {
         stateData.setMix("attack", "move", 0.2f);
         stateData.setMix("attack", "die", 0.5f);
         stateData.setMix("move", "die", 0.2f);
-    }
-
-    @Override
-    public void update(float deltaTime) {
-        super.update(deltaTime);
-
-        if(ai.update(deltaTime)){
-            die();
-        }
-    }
-
-    private void die() {
-
     }
 
     @Override

@@ -202,6 +202,13 @@ public class Player extends Creature {
             }
 
             runningParticles.setPosition(x-10, y);
+
+            // dash movement
+            if(state.getCurrent(0).getAnimation().getName().equals("dash")){
+                if(flipped) velocityX = -450  * deltaTime;
+                else  velocityX = 450  * deltaTime;
+            }
+
             x += velocityX;
             y += velocityY;
             if (runningParticles.isComplete() && input.getState() == States.Animation.RUN) {
@@ -219,6 +226,8 @@ public class Player extends Creature {
             state.update(deltaTime);
 
             state.apply(skeleton);
+
+
 
             updateEvent.set(id, x, y, input.getState(), skeleton.getFlipX());
         }
@@ -278,7 +287,9 @@ public class Player extends Creature {
                 //            state.addAnimation(1, "move", true, jumpAnimation.getDuration() - 30);
                 //            state.addAnimation(1, "move", false, 0);
             }
-            if (input.getState() == States.Animation.ATTACK && !current.startsWith("attack_1")) {
+            if (input.getState() == States.Animation.ATTACK && !current.startsWith("attack")) {
+
+                System.out.println("ATTACK!");
                 attack();
                 String attack = attackAnimations.get((int) (Math.random() * attackAnimations.size));
                 state.setAnimation(0, attack, false);

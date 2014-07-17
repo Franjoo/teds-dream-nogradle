@@ -65,7 +65,7 @@
  </tileset>
  <layer name="bg_00" width="70" height="1">
   <properties>
-   <property name="p" value="0, 0"/>
+   <property name="p" value="-0.6, 0"/>
    <property name="v" value="0, 1"/>
   </properties>
   <data encoding="base64" compression="zlib">
@@ -83,7 +83,7 @@
  </layer>
  <layer name="bg_02" width="70" height="1">
   <properties>
-   <property name="p" value="0, 0"/>
+   <property name="p" value="0, -0.02"/>
    <property name="v" value="0.5, 1"/>
   </properties>
   <data encoding="base64" compression="zlib">
@@ -99,12 +99,12 @@
    eJydzUsOgCAMhOFeCMQHKMLh5uj+CWHDQg2Lb9FpM41mlnDiQhzmjBsFtWViJ27ErcjETtwot+y1b8WGHcePf+PewWNBmOj76u/zA67tEvY=
   </data>
  </layer>
- <objectgroup draworder="topdown" name="enemies" width="70" height="1" visible="0">
+ <objectgroup draworder="topdown" name="enemies" width="70" height="1">
   <object name="Spider" type="Creature" x="1672" y="320">
    <properties>
     <property name="ap" value="1"/>
     <property name="hp" value="1"/>
-    <property name="scale" value="0.5, 0.9"/>
+    <property name="scale" value="1.7, 2.0"/>
    </properties>
   </object>
   <object name="Spinne" type="Creature" x="1848" y="320">
