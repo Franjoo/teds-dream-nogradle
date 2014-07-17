@@ -19,11 +19,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
  */
 public class HelpScreen  implements Screen, GestureDetector.GestureListener {
 
-
     private Stage stage;
     private SpriteBatch batch;
     private int page = 0;
-    private Texture[] bg = {new Texture("ui/menus/help/how-to-1.jpg"), new Texture("ui/menus/help/how-to-2.jpg"), new Texture("ui/menus/help/how-to-3.jpg")};
+    private Texture[] helpPages = {new Texture("ui/menus/help/how-to-1.jpg"), new Texture("ui/menus/help/how-to-2.jpg"), new Texture("ui/menus/help/how-to-3.jpg")};
 
     private final Controller game;
 
@@ -42,7 +41,7 @@ public class HelpScreen  implements Screen, GestureDetector.GestureListener {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(bg[page], 0, 0, stage.getWidth(), stage.getHeight());
+        batch.draw(helpPages[page], 0, 0, stage.getWidth(), stage.getHeight());
         batch.end();
 
         stage.act(delta);
@@ -87,7 +86,7 @@ public class HelpScreen  implements Screen, GestureDetector.GestureListener {
 
     @Override
     public boolean tap(float v, float v2, int i, int i2) {
-        if(++page >= bg.length) {
+        if(++page >= helpPages.length) {
             game.setScreen(game.mainMenu);
         }
         return true;

@@ -58,7 +58,6 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
         sound_title = Assets.instance().get("sounds/menus/titelmusik.wav");
         sound_title.setLooping(0, true);
         sound_title.setVolume(100, 0);
-        sound_title.play();
 
         stage = new Stage();
         atlas = new TextureAtlas("ui/menus/main/mainMenuButton.pack");
@@ -180,11 +179,11 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
     public void show() {
         Gdx.input.setInputProcessor(stage);
 
+        sound_title.play();
         // play title music
 //        sound_title.play(volume);
 
         //todo sound ausfaden, problem: kein volume getter um TweenAccessor zu benutzen
-
 
         // add listener
         buttonPlay.addListener(listener);
@@ -195,13 +194,10 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
     @Override
     public void hide() {
 
-
         SoundFader s = new SoundFader(sound_title);
         s.start();
 
-
-
-
+        //sound_title.pause();
         // remove listener
         buttonPlay.removeListener(listener);
         buttonSettings.removeListener(listener);
