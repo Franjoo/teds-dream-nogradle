@@ -1,7 +1,9 @@
 package com.angrynerds.tedsdream.gameobjects.skeletals;
 
 import com.angrynerds.tedsdream.Assets;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
@@ -27,6 +29,7 @@ public class Creature extends Skeletal {
 
     // animation
     private Texture tex_shadow = Assets.instance().get("misc/shadow.png");
+    private ParticleEffect bloodParticles = new ParticleEffect();
     protected AnimationStateData stateData;
     protected AnimationState state;
 
@@ -44,6 +47,7 @@ public class Creature extends Skeletal {
         stateData = new AnimationStateData(skeletonData);
         state = new AnimationState(stateData);
         state.setAnimation(0, skeletonData.getAnimations().first().getName(), true);
+        bloodParticles.load(Gdx.files.internal("particles/blood.p"), Gdx.files.internal("particles"));
     }
 
     public Creature(TextureAtlas atlas, String path, float scale, String skin, float ap, float hp) {
@@ -86,15 +90,16 @@ public class Creature extends Skeletal {
     public void update(float delta) {
         updateAnimations(delta);
         updatePosition(delta);
+        bloodParticles.update(delta);
     }
 
     @Override
     public void draw(SpriteBatch batch) {
         // shadow
         batch.draw(tex_shadow, skeletonBounds.getMinX(), y - tex_shadow.getHeight()/2, skeletonBounds.getWidth(), skeletonBounds.getHeight()/2);
-
         // skeletal
         super.draw(batch);
+        bloodParticles.draw(batch);
     }
 
     public void moveInDirection(float dx, float dy, float speed) {
@@ -107,6 +112,10 @@ public class Creature extends Skeletal {
 
     public void setDamage(float dmg) {
         hp -= dmg;
+        bloodParticles.setPosition(x, y);
+        bloodParticles.start();
+        if (hp <= 0)
+            die();
     }
 
     public float getHP() {
@@ -145,6 +154,5 @@ public class Creature extends Skeletal {
     public float getSize() {
         return scale;
     }
-
 
 }
