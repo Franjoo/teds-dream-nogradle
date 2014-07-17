@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="70" height="1" tilewidth="352" tileheight="640">
  <properties>
-  <property name="boundsY" value="0, 384"/>
+  <property name="boundsY" value="0,384"/>
  </properties>
  <tileset firstgid="1" name="bg_00" tilewidth="352" tileheight="640">
   <image source="img/bg_00.png" width="1408" height="640"/>
