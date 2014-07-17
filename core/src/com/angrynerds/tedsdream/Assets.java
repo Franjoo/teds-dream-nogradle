@@ -38,7 +38,7 @@ public class Assets extends AssetManager{ // singleton
 
         // ui elements
         setLoader(TextureAtlas.class, new TextureAtlasLoader(new InternalFileHandleResolver()));
-        load(DIR_UI + "loading.pack", TextureAtlas.class);
+        load(DIR_UI + "loading_screen/loadingscreen.pack", TextureAtlas.class);
         finishLoading(); // needed for loading screen
 
         // tiled maps
