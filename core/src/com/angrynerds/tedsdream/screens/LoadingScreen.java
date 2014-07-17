@@ -69,8 +69,8 @@ public class LoadingScreen extends AbstractScreen {
     @Override
     public void resize(int width, int height) {
         // Set our screen to always be XXX x 480 in size
-        width = 480 * width / height;
-        height = 480;
+        width = 540 * width / height;
+        height = 540;
 
         float scalingFactor = height / screenBg.getHeight();
         screenBg.setSize(screenBg.getWidth() * scalingFactor, screenBg.getHeight() * scalingFactor);
@@ -80,14 +80,14 @@ public class LoadingScreen extends AbstractScreen {
         scalingFactor = height / loadingBg.getHeight();
         loadingBg.setSize(loadingBg.getWidth() * scalingFactor, loadingBg.getHeight() * scalingFactor);
 
-        scalingFactor =  (loadingBg.getWidth() / loadingFrame.getWidth()) / 1.7f;
+        scalingFactor =  (loadingBg.getWidth() / loadingFrame.getWidth()) / 1.9f;
         loadingFrame.setSize(loadingFrame.getWidth() * scalingFactor, loadingFrame.getHeight() * scalingFactor);
         loadingFrame.setX((stage.getWidth() - loadingFrame.getWidth()) / 2);
-        loadingFrame.setY((stage.getHeight() - loadingFrame.getHeight()) / 2);
+        loadingFrame.setY((stage.getHeight() - loadingFrame.getHeight()) / 1.8f);
 
         loadingBar.setSize(loadingBar.getWidth() * scalingFactor, loadingBar.getHeight() * scalingFactor);
         loadingBar.setX(loadingFrame.getX() + 15);
-        loadingBar.setY(loadingFrame.getY() + 35);
+        loadingBar.setY(loadingFrame.getY() * 1.17f);
 
         loadingBg.setX(loadingFrame.getX() - (loadingBg.getWidth() - loadingFrame.getWidth()) / 2);
     }
