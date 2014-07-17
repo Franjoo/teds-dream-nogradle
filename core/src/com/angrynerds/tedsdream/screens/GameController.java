@@ -91,6 +91,7 @@ public class GameController extends ScreenAdapter {
 
         try {
             map = new Map(camera, (TiledMap) Assets.instance().get(mapname));
+
         } catch (MapLayerParsingException e) {
             e.printStackTrace();
         }
@@ -256,6 +257,7 @@ public class GameController extends ScreenAdapter {
         // menu on player dead
         if (player.getHP() <= 0) {
             game.setScreen(game.mainMenu);
+            map.stopBackGroundSound();
         }
 
 
@@ -311,6 +313,10 @@ public class GameController extends ScreenAdapter {
 
     private void handleDebug(float delta) {
 
+    }
+
+    public void playBackGroundSound(){
+       map.playBackGroundsound();
     }
 
     HashMap<Integer, PlayerRemote> getPlayerRemotes() {

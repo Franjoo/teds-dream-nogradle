@@ -58,6 +58,11 @@ public class Activities {
         }
     }
 
+    private static void TriggerSound (Creature actor, String name){
+
+
+    }
+
     public static class CoverCreature extends Activity<Creature>{
 
         public CoverCreature(Creature actor, Creature target, GameController game) {
@@ -253,6 +258,7 @@ public class Activities {
             Creature player = NearestPlayer(actor);
             if (player.getHP() > 0 && Distance(actor, player) < 30) {
                 TriggerAnimation(actor, "attack");
+
                 return false;
             }
 

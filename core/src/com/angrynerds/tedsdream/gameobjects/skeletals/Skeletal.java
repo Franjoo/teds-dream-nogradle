@@ -61,6 +61,7 @@ public class Skeletal extends GameObject {
         // skeleton json
         SkeletonJson skeletonJson = new SkeletonJson(atlas);
 
+
         // set scale
         skeletonJson.setScale(scale);
 

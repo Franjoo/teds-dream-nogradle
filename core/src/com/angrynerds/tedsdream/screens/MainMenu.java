@@ -26,7 +26,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
  * Time: 16:26
  * To change this template use File | Settings | File Templates.
  */
-public class MainMenu  implements Screen, TweenAccessor<Sound> {
+public class MainMenu implements Screen, TweenAccessor<Sound> {
 
 
     private Stage stage;
@@ -34,7 +34,7 @@ public class MainMenu  implements Screen, TweenAccessor<Sound> {
     private Texture bg;
     private Skin skin;
     private Table table;
-    private Button buttonPlay, buttonSettings;
+    private Button buttonPlay, buttonSettings, buttonHelp;
     private BitmapFont white;
     private TextureAtlas atlas;
     private Label heading;
@@ -78,6 +78,10 @@ public class MainMenu  implements Screen, TweenAccessor<Sound> {
         // buttons
         buttonPlay = new Button(skin.getDrawable("button_play"));
         buttonSettings = new Button((skin.getDrawable("button_settings")));
+        Skin helpButtonSkin = new Skin();
+        helpButtonSkin.add("button", new Texture("ui/menus/main/questionMark.png"));
+        buttonHelp = new Button(helpButtonSkin.getDrawable("button"));
+        buttonHelp.setPosition(stage.getWidth() - buttonHelp.getWidth() - 5, 5);
 
         // add to table
         table.add(buttonPlay);
@@ -117,12 +121,11 @@ public class MainMenu  implements Screen, TweenAccessor<Sound> {
                     Gdx.app.postRunnable(new Runnable() {
                         @Override
                         public void run() {
-                            game.setScreen(new GameController(game,false,false));
-//                            game.setScreen(new IntroScreen(game));
+//                            game.setScreen(new GameController(game,false,false));
+                            game.setScreen(new IntroScreen(game));
                             System.out.println("play pressed");
                         }
                     });
-
 
                 }
 
@@ -130,6 +133,8 @@ public class MainMenu  implements Screen, TweenAccessor<Sound> {
                 else if (event.getTarget() == buttonSettings) {
                     game.setScreen(game.multiplayer_choose);
                     System.out.println("settings pressed (multiplayer)");
+                } else if (event.getTarget() == buttonHelp) {
+                    game.setScreen(new HelpScreen(game));
                 }
 
                 return true;
@@ -139,11 +144,12 @@ public class MainMenu  implements Screen, TweenAccessor<Sound> {
 
         buttonPlay.addListener(listener);
         buttonSettings.addListener(listener);
+        buttonHelp.addListener(listener);
 
         // add to stage
         stage.addActor(table);
+        stage.addActor(buttonHelp);
         table.debug();
-
     }
 
     @Override
@@ -181,9 +187,7 @@ public class MainMenu  implements Screen, TweenAccessor<Sound> {
         // add listener
         buttonPlay.addListener(listener);
         buttonSettings.addListener(listener);
-
     }
-
 
 
     @Override
