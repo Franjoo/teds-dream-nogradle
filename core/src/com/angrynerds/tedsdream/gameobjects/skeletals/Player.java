@@ -49,6 +49,10 @@ public class Player extends Creature {
     // sound_sword
     private Sound sound_sword = Assets.instance().get("sounds/ingame/lightsaber.mp3");
     private Sound sound_dash = Assets.instance().get("sounds/ingame/dash.wav");
+    private Sound jump = Assets.instance().get("sounds/ingame/ted/jump_01.mp3");
+    private Sound jump2 = Assets.instance().get("sounds/ingame/ted/jump_02.mp3");
+    private Sound sound_walk = Assets.instance().get("sounds/ingame/ted/walk.wav");
+
 
     private ParticleEffect runningParticles = new ParticleEffect();
 
@@ -261,8 +265,16 @@ public class Player extends Creature {
 
         if (current.equals("move") || current.equals("idle")) {
             if (input.getState() == States.Animation.JUMP && !current.equals("jump")) {
+                double i =  Math.random();
+
                 state.setAnimation(0, "jump", false);
                 state.addAnimation(0, "idle", true, 0);
+                sound_walk.stop();
+
+                if(i <= 0.5)
+                    jump.play();
+                else
+                   jump2.play();
                 //            state.addAnimation(1, "move", true, jumpAnimation.getDuration() - 30);
                 //            state.addAnimation(1, "move", false, 0);
             }
@@ -271,6 +283,8 @@ public class Player extends Creature {
                 String attack = attackAnimations.get((int) (Math.random() * attackAnimations.size));
                 state.setAnimation(0, attack, false);
                 state.addAnimation(0, "idle", true, 0);
+                sound_walk.stop();
+
             }
             if ((input.getState() == States.Animation.DASH_RIGHT || input.getState() == States.Animation.DASH_LEFT) && !current.equals("dash")) {
                 if (input.getState() == States.Animation.DASH_RIGHT)
@@ -280,19 +294,25 @@ public class Player extends Creature {
                 state.setAnimation(0, "dash", false);
                 state.addAnimation(0, "idle", true, 0);
                 sound_dash.play();
+                sound_walk.stop();
+
             }
             if ((input.getState() == States.Animation.DEAD) && !current.equals("die")) {
                 state.setAnimation(0, "die", false);
+                sound_walk.stop();
+
             }
         }
         if (input.getState() == States.Animation.IDLE && !current.equals("idle")) {
             if (current.equals("move"))
                 state.setAnimation(0, "idle", false);
             state.addAnimation(0, "idle", true, 0);
+            sound_walk.stop();
         }
         if (input.getState() == States.Animation.RUN && current.equals("idle")) {
             state.setAnimation(0, "move", false);
             state.addAnimation(0, "move", true, 0);
+            sound_walk.loop();
         }
         if (input.getState() != States.Animation.DEAD && input.getState() != States.Animation.RUN)
             input.setState(States.Animation.IDLE);

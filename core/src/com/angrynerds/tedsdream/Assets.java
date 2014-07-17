@@ -96,6 +96,12 @@ public class Assets extends AssetManager{ // singleton
         // sounds
         load(DIR_SOUNDS + "ingame/lightsaber.mp3", Sound.class);
         load(DIR_SOUNDS + "ingame/dash.wav", Sound.class);
+        load(DIR_SOUNDS + "ingame/ted/jump_01.mp3",Sound.class);
+        load(DIR_SOUNDS + "ingame/ted/jump_02.mp3",Sound.class);
+        load(DIR_SOUNDS + "ingame/ted/walk.wav",Sound.class);
+        load(DIR_SOUNDS + "ingame/atmosphere/woods.mp3",Sound.class);
+
+
 
         // misc
         load("misc/shadow.png", Texture.class);

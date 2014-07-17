@@ -38,9 +38,9 @@ public class IntroScreen extends AbstractScreen {
 
         batch = new SpriteBatch();
 
-        skeleton = new Skeletal((TextureAtlas) Assets.instance().get("sequenzes/intro/Sequenz1_start/sequenz_1.atlas"),"sequenzes/intro/Sequenz1_start/sequenz_1",1.1f);
-        animation2 = new Skeletal((TextureAtlas) Assets.instance().get("sequenzes/intro/Sequenz2_mittel/sequenz_2.atlas"),"sequenzes/intro/Sequenz2_mittel/sequenz_2",2.5f);
-        animation3 = new Skeletal((TextureAtlas) Assets.instance().get("sequenzes/intro/Sequenz3_ende/sequenz_3.atlas"),"sequenzes/intro/Sequenz3_ende/sequenz_3",1.5f);
+        skeleton = new Skeletal( Assets.instance().get("sequenzes/intro/Sequenz1_start/sequenz_1.atlas"),"sequenzes/intro/Sequenz1_start/sequenz_1",1.2f);
+        animation2 = new Skeletal( Assets.instance().get("sequenzes/intro/Sequenz2_mittel/sequenz_2.atlas"),"sequenzes/intro/Sequenz2_mittel/sequenz_2",2.7f);
+        animation3 = new Skeletal(Assets.instance().get("sequenzes/intro/Sequenz3_ende/sequenz_3.atlas"),"sequenzes/intro/Sequenz3_ende/sequenz_3",1.5f);
 
         AnimationStateData animationStateData1 = new AnimationStateData(skeleton.getSkeletonData());
         AnimationStateData animationStateData2 = new AnimationStateData(animation2.getSkeletonData());
@@ -57,7 +57,7 @@ public class IntroScreen extends AbstractScreen {
 
 
         // center position
-        skeleton.getSkeleton().setX((Gdx.graphics.getWidth() / 2)+15);
+        skeleton.getSkeleton().setX((Gdx.graphics.getWidth() / 2)+30);
         skeleton.getSkeleton().setY(0);
 
 
@@ -106,6 +106,7 @@ public class IntroScreen extends AbstractScreen {
         }
         else {
             controller.setScreen(controller.playScreen);
+            controller.playScreen.playBackGroundSound();
             screen = 0;
         }
 
