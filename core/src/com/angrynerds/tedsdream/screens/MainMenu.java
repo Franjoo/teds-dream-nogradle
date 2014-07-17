@@ -246,7 +246,6 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
               s.setVolume(0, i );
                 try {
                     this.sleep(20);
-                    System.out.println(i);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
