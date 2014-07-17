@@ -52,7 +52,7 @@ public class ControllerUI {
         //stage = new Stage(800, 480, true, PlayScreen.getBatch());
         stage =new Stage();
         lifeBar = new Lifebar("lifebar2_03.png", "lifebar2b_03.png", "lifebar2c_03.png");
-        lifeBar.setPosition(10, C.VIEWPORT_HEIGHT - lifeBar.getHeight());
+        lifeBar.setPosition(10, stage.getHeight() - lifeBar.getHeight());
 
         Skin skin = new Skin();
         initSkin(skin);
