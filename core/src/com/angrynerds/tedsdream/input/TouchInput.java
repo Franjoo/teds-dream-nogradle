@@ -32,8 +32,6 @@ public class TouchInput extends DragListener implements IGameInputController {
     public TouchInput(ControllerUI controller) {
         this.controller = controller;
         touchOrder = new Array<Integer>();
-
-
         init();
     }
 
@@ -83,10 +81,6 @@ public class TouchInput extends DragListener implements IGameInputController {
     @Override
     public void enter(InputEvent event, float x, float y, int pointer,
                       Actor fromActor) {
-
-        System.out.println(event.getTarget());
-
-
         MyButton b;
         b = (MyButton) event.getTarget();
         if (!b.getOver()) {
@@ -99,7 +93,6 @@ public class TouchInput extends DragListener implements IGameInputController {
 
     @Override
     public float get_stickX() {
-        System.out.println(controller.getTouchpad().getKnobPercentX());
         return controller.getTouchpad().getKnobPercentX();
     }
 

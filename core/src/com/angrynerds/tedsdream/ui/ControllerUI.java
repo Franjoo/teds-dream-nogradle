@@ -3,11 +3,14 @@ package com.angrynerds.tedsdream.ui;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 import aurelienribon.tweenengine.equations.Bounce;
+import com.angrynerds.tedsdream.gameobjects.skeletals.Player;
 import com.angrynerds.tedsdream.input.TouchInput;
 import com.angrynerds.tedsdream.tweens.LifebarAccessor;
 import com.angrynerds.tedsdream.util.C;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -33,11 +36,12 @@ public class ControllerUI {
     private Table buttonTable;
     private MyButton[] buttons = new MyButton[5];
     private Lifebar lifeBar;
+    private Player player;
 
     private Stage stage;
 
     private TweenManager manager;
-    private boolean showInputUI = true;
+    private boolean showInputUI = Gdx.app.getType() == Application.ApplicationType.Android;
 
     public ControllerUI() {
         init();
@@ -46,7 +50,7 @@ public class ControllerUI {
     private void init() {
 
         //stage = new Stage(800, 480, true, PlayScreen.getBatch());
-          stage =new Stage();
+        stage =new Stage();
         lifeBar = new Lifebar("lifebar2_03.png", "lifebar2b_03.png", "lifebar2c_03.png");
         lifeBar.setPosition(10, C.VIEWPORT_HEIGHT - lifeBar.getHeight());
 
@@ -62,7 +66,7 @@ public class ControllerUI {
 
         addUIElementsToStage();
 
-        tweenLifebar();
+        //tweenLifebar();
     }
 
     private void tweenLifebar() {
@@ -76,13 +80,10 @@ public class ControllerUI {
     }
 
     private void addUIElementsToStage() {
-        stage.addActor(touchpad);
-        stage.addActor(buttonTable);
-//        stage.addActor(topButton);
-//        stage.addActor(rightButton);
-//        stage.addActor(botButton);
-//        stage.addActor(leftButton);
-//        stage.addActor(midButton);
+        if(showInputUI) {
+            stage.addActor(touchpad);
+            stage.addActor(buttonTable);
+        }
         stage.addActor(lifeBar);
     }
 
@@ -151,6 +152,10 @@ public class ControllerUI {
         touchpad.setBounds(15, 75, 120, 120);
     }
 
+    private void initLifeBar() {
+
+    }
+
     private void initSkin(Skin skin) {
         skin.add("joystick_bg", new Texture("ui/ingame/controls/joystick_bg.png"));
         skin.add("joystick_knob", new Texture("ui/ingame/controls/joystick_knob.png"));
@@ -168,7 +173,8 @@ public class ControllerUI {
 
     public void update(float delta) {
         stage.act(delta);
-        manager.update(delta);
+        lifeBar.setLifePercent(player.getHP()/player.getHpMax());
+        //manager.update(delta);
     }
 
     // public void render() {
@@ -212,8 +218,10 @@ public class ControllerUI {
         return lifeBar;
     }
 
-    public void render(float delta) {
-            stage.draw();
+    public void setPlayer(Player player) { this.player = player; }
+
+    public void render(SpriteBatch batch) {
+        stage.draw();
 //        Tween.to(lifeBar, -1 , 1.0f)
 //        .target(-1, -1)
 //        .ease(Bounce.INOUT)

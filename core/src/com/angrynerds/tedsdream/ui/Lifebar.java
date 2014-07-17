@@ -1,6 +1,7 @@
 package com.angrynerds.tedsdream.ui;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -62,8 +63,8 @@ public class Lifebar extends Actor {
         return border.getHeight();
     }
 
-  //  @Override
-    public void draw(SpriteBatch batch, float parentAlpha) {
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
         batch.draw(life, getX()+bubble.getWidth()-19, getY(), life.getWidth(), life.getHeight());
         batch.draw(border, getX()+bubble.getWidth()-18, getY());
         batch.draw(bubble,getX(), getY());
