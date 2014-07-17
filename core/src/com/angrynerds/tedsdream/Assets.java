@@ -105,6 +105,10 @@ public class Assets extends AssetManager{ // singleton
 
         // misc
         load("misc/shadow.png", Texture.class);
+
+        // ui
+        load("ui/ingame/dreamover.png", Texture.class);
+
     }
 
     @Override

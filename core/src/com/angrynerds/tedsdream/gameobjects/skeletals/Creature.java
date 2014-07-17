@@ -37,6 +37,7 @@ public class Creature extends Skeletal {
     private ParticleEffect bloodParticles = new ParticleEffect();
     protected AnimationStateData stateData;
     protected AnimationState state;
+    protected boolean attackTriggered;
 
     //shadow
     boolean shadowSizes = false;
@@ -74,6 +75,7 @@ public class Creature extends Skeletal {
 
     public void setAnimation(String name, boolean loop) {
         state.setAnimation(0, name, loop);
+        if (name.startsWith("attack")) attackTriggered = true;
     }
 
     public String getCurrentAnimationName() {
@@ -81,7 +83,7 @@ public class Creature extends Skeletal {
     }
 
     public boolean isDead() {
-        return state.getCurrent(0) == null;
+        return state.getCurrent(0) == null || hp <= 0;
     }
 
     public void updateAnimations(float delta) {
@@ -105,7 +107,10 @@ public class Creature extends Skeletal {
 
 
     public void updatePosition(float delta) {
+
+
         if (ai != null) {
+            attackTriggered = false;
             ai.update(delta);
         }
 
@@ -123,6 +128,11 @@ public class Creature extends Skeletal {
         updatePosition(delta);
         updateAnimations(delta);
 
+    }
+
+    public boolean hasAttacked() {
+        return state.getCurrent(0).getAnimation().getName().startsWith("attack") &&
+                attackTriggered;
     }
 
     @Override

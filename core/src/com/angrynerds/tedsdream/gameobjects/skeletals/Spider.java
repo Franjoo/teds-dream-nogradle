@@ -21,7 +21,7 @@ public class Spider extends Creature {
     private float scale; // relative to scale bounds
 
     public Spider(TextureAtlas atlas, float scale, float ap, float hp, float x, float y) {
-        super(atlas, "spine/spinne/spinne", scale, null, scale, hp, x, y);
+        super(atlas, "spine/spinne/spinne", scale, null, ap, hp, x, y);
 
         this.scale = scale / SCALE_MAX;
 

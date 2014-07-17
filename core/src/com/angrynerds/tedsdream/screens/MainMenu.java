@@ -121,8 +121,8 @@ public class MainMenu implements Screen, TweenAccessor<Sound> {
                     Gdx.app.postRunnable(new Runnable() {
                         @Override
                         public void run() {
-//                            game.setScreen(new GameController(game,false,false));
-                            game.setScreen(new IntroScreen(game));
+                            game.setScreen(new GameController(game,false,false));
+//                            game.setScreen(new IntroScreen(game));
                             System.out.println("play pressed");
                         }
                     });

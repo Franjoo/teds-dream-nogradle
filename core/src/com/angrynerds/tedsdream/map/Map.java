@@ -5,7 +5,9 @@ import com.angrynerds.tedsdream.Layer;
 import com.angrynerds.tedsdream.errors.MapLayerParsingException;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -114,17 +116,18 @@ public class Map {
         }
     }
 
-    public void renderForeground() {
-        render(layers_foreground);
+    public void renderForeground(Color tint) {
+        render(layers_foreground, tint);
     }
 
-    public void renderBackground() {
-        render(layers_background);
+    public void renderBackground(Color tint) {
+        render(layers_background, tint);
     }
 
-    private void render(Array<Layer> layers) {
+    private void render(Array<Layer> layers, Color tint) {
         vec3.set(camera.position);
 
+        renderer.getSpriteBatch().setColor(tint);
         renderer.getSpriteBatch().begin();
 
         for (int i = 0; i < layers.size; i++) {
@@ -145,6 +148,7 @@ public class Map {
 
         }
         renderer.getSpriteBatch().end();
+        renderer.getSpriteBatch().setColor(1, 1, 1, 1);
 
 
     }
@@ -158,7 +162,7 @@ public class Map {
         backgroundSound.loop();
     }
 
-    public void stopBackGroundSound(){
+    public void stopBackGroundSound() {
         backgroundSound.stop();
     }
 
