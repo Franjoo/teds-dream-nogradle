@@ -185,10 +185,10 @@ public class GameController extends ScreenAdapter {
     public void update(float delta) {
 
 
-        if (Gdx.app.getType() == Application.ApplicationType.Android) {
+//        if (Gdx.app.getType() == Application.ApplicationType.Android) {
             ui.update(delta);
 
-        }
+//        }
 
         player.update(delta);
         for (int i = 0; i <= playersRemotes.size(); i++) {
@@ -257,9 +257,9 @@ public class GameController extends ScreenAdapter {
 
         map.renderForeground();
 
-        if (Gdx.app.getType() == Application.ApplicationType.Android) {
+//        if (Gdx.app.getType() == Application.ApplicationType.Android) {
             ui.render(delta);
-        }
+//        }
 
         handleDebug(delta);
 
