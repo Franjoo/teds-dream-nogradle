@@ -3,6 +3,7 @@ package com.angrynerds.tedsdream.gameobjects.skeletals;
 import com.angrynerds.tedsdream.Assets;
 import com.angrynerds.tedsdream.map.Map;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -132,6 +133,10 @@ public class Creature extends Skeletal {
         bloodParticles.start();
         if (hp <= 0)
             die();
+    }
+
+    public void playSound(String name){
+
     }
 
     public float getHP() {
