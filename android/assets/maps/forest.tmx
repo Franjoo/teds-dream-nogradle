@@ -136,12 +136,21 @@
     <property name="width" value="5"/>
    </properties>
   </object>
-  <object name="Widdow" type="Creature" x="4576" y="320" width="176" height="160">
+  <object name="Widdow" type="Creature" x="21032" y="320" width="176" height="160">
    <properties>
     <property name="ap" value="4.0, 4.5"/>
     <property name="count" value="1"/>
     <property name="hp" value="3.0, 3.5"/>
     <property name="scale" value="3.0, 3.0"/>
+    <property name="width" value="5"/>
+   </properties>
+  </object>
+  <object name="Spider" type="Creature" x="16720" y="0" width="1760" height="640">
+   <properties>
+    <property name="ap" value="0.2, 0.4"/>
+    <property name="count" value="5"/>
+    <property name="hp" value="0.4, 0.4"/>
+    <property name="scale" value="0.2, 0.7"/>
     <property name="width" value="5"/>
    </properties>
   </object>
