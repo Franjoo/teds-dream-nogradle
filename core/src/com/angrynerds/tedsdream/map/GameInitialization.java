@@ -10,10 +10,12 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
 import java.io.Serializable;
+import java.util.Iterator;
 
 /**
  * Author: Franz Benthin
@@ -40,34 +42,47 @@ public class GameInitialization implements Serializable {
                 for (int j = 0; j < objects.getCount(); j++) {
                     MapProperties p = objects.get(j).getProperties();
 
+//                    Iterator<String> it = p.getKeys();
+//                    while (it.hasNext()){
+//                        String s = it.next();
+//                        System.out.println(s + "  -  " + p.get(s).toString());
+//                    }
+
                     String type = p.get("type").toString().trim().toLowerCase();
                     String name = objects.get(j).getName().trim().toLowerCase();
 
-                    // parse creatures
-                    if (type.equals("creature")) {
-                        String[] args;
+                    if (!p.containsKey("count"))
+                        throw new CreatureParsingException("creature object must contain property 'count'");
+                    int count = Integer.parseInt(p.get("count").toString());
 
-                        // type
-                        String creatureType = name;
+                    for (int c = 0; c < count; c++) {
+                        // parse creatures
+                        if (type.equals("creature")) {
+                            String[] args;
 
-                        // position
-                        float x = Float.parseFloat(p.get("x").toString());
-                        float y = Float.parseFloat(p.get("y").toString());
+                            float x, y;
+                            x = Float.parseFloat(p.get("x").toString());
+                            y = Float.parseFloat(p.get("y").toString());
 
-                        // dimension
-                        float scale = 1;
-                        args = (p.get("scale").toString().trim().split(","));
-                        if (args.length == 1) scale = Float.parseFloat(args[0]);
+                            // spawn area
+                            if (count > 1 && !p.containsKey("width"))
+                                throw new CreatureParsingException("creature spawn must contain property 'width'");
+                            else {
+                                x = MathUtils.random(x, x + Float.parseFloat(p.get("width").toString()) * Map.getProperties().tileWidth);
+                                y = MathUtils.random(Map.getProperties().boundsY_min, Map.getProperties().boundsY_max);
+                            }
 
-                        // creature properties
-                        float ap = Float.parseFloat(p.get("ap").toString());
-                        float hp = Float.parseFloat(p.get("hp").toString());
 
-                        spawnArray.add(new CreatureSpawn(creatureType, x, y, scale, ap, hp));
+                            float scale = getRandomFromTupel("scale", p);
+                            float ap = getRandomFromTupel("ap", p);
+                            float hp = getRandomFromTupel("hp", p);
+//
 
-//                        if(!p.containsKey("count")) throw new CreatureParsingException("creature object must contain property 'count'");
+                            spawnArray.add(new CreatureSpawn(name, x, y, scale, ap, hp));
+
 //                        int count = Integer.parseInt(p.get("count").toString());
 
+                        }
                     }
 
 
@@ -136,6 +151,14 @@ public class GameInitialization implements Serializable {
 
     }
 
+    public float getRandomFromTupel(String key, MapProperties p) {
+        float value;
+        String[] args = (p.get(key).toString().trim().split(","));
+        if (args.length == 1) value = Float.parseFloat(args[0]);
+        else value = MathUtils.random(Float.parseFloat(args[0]), Float.parseFloat(args[1]));
+        return value;
+    }
+
 
     public GameInitializationEvent getEnemyInitializationEvent() {
         Json json = new Json();
@@ -147,7 +170,6 @@ public class GameInitialization implements Serializable {
     public Array<CreatureSpawn> getSpawnArray() {
         return spawnArray;
     }
-
 
 
 }

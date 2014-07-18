@@ -100,39 +100,49 @@
   </data>
  </layer>
  <objectgroup draworder="topdown" name="enemies" width="70" height="1">
-  <object name="Spider" type="Creature" x="1672" y="320">
+  <object name="Spider" type="Creature" x="1760" y="0" width="1760" height="640">
    <properties>
-    <property name="ap" value="1"/>
-    <property name="hp" value="1"/>
-    <property name="scale" value="1.7, 2.0"/>
+    <property name="ap" value="0, 0.4"/>
+    <property name="count" value="5"/>
+    <property name="hp" value="0, 0.4"/>
+    <property name="scale" value="0.0, 0.7"/>
+    <property name="width" value="5"/>
    </properties>
   </object>
-  <object name="Spinne" type="Creature" x="1848" y="320">
+  <object name="Goblin" type="Creature" x="5544" y="0" width="1760" height="640">
    <properties>
-    <property name="ap" value="1"/>
-    <property name="hp" value="1"/>
-    <property name="scale" value="0.5, 0.9"/>
+    <property name="ap" value="0.2, 0.6"/>
+    <property name="count" value="5"/>
+    <property name="hp" value="0, 0.4"/>
+    <property name="scale" value="0.4, 0.7"/>
+    <property name="width" value="5"/>
    </properties>
   </object>
-  <object name="Wizzard" type="Creature" x="1848" y="320">
+  <object name="Rabbit" type="Creature" x="8800" y="0" width="1760" height="640">
    <properties>
-    <property name="ap" value="1"/>
-    <property name="hp" value="1"/>
-    <property name="scale" value="0.5, 0.9"/>
+    <property name="ap" value="0.2, 0.6"/>
+    <property name="count" value="5"/>
+    <property name="hp" value="0, 0.4"/>
+    <property name="scale" value="0.4, 0.7"/>
+    <property name="width" value="5"/>
    </properties>
   </object>
-  <object name="Rabbit" type="Creature" x="2024" y="320">
+  <object name="Wizzard" type="Creature" x="12320" y="0" width="1760" height="640">
    <properties>
-    <property name="ap" value="1"/>
-    <property name="hp" value="1"/>
-    <property name="scale" value="0.5, 0.9"/>
+    <property name="ap" value="0.2, 0.6"/>
+    <property name="count" value="5"/>
+    <property name="hp" value="0, 0.4"/>
+    <property name="scale" value="0.4, 0.7"/>
+    <property name="width" value="5"/>
    </properties>
   </object>
-  <object name="Goblin" type="Creature" x="2200" y="320">
+  <object name="Widdow" type="Creature" x="4576" y="320" width="176" height="160">
    <properties>
-    <property name="ap" value="1"/>
-    <property name="hp" value="1"/>
-    <property name="scale" value="0.5, 0.9"/>
+    <property name="ap" value="4.0, 4.5"/>
+    <property name="count" value="1"/>
+    <property name="hp" value="3.0, 3.5"/>
+    <property name="scale" value="3.0, 3.0"/>
+    <property name="width" value="5"/>
    </properties>
   </object>
  </objectgroup>

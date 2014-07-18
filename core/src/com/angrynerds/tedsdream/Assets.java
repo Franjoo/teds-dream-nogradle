@@ -89,6 +89,7 @@ public class Assets extends AssetManager{ // singleton
         load(DIR_SPINE + "lise/lise.atlas", TextureAtlas.class);
 
         load(DIR_SPINE + "spinne/spinne.atlas", TextureAtlas.class);
+        load(DIR_SPINE + "boss/spinne.atlas", TextureAtlas.class);
         load(DIR_SPINE + "hase/hase.atlas", TextureAtlas.class);
         load(DIR_SPINE + "goblin/goblin.atlas", TextureAtlas.class);
 

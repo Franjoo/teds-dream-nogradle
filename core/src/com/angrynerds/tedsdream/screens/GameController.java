@@ -204,6 +204,15 @@ public class GameController extends ScreenAdapter {
                             MathUtils.lerp(Wizzard.HP_MIN, Wizzard.HP_MAX, s.getScale()), // hp
                             s.getX(), s.getY()));
                 }
+
+                // Black Widdow
+                else if (s.getCreatureType().equals("widdow")) {
+                    enemies.add(new Widdow((com.badlogic.gdx.graphics.g2d.TextureAtlas) Assets.instance().get("spine/boss/spinne.atlas"),
+                            MathUtils.lerp(Widdow.SCALE_MIN, Widdow.SCALE_MAX, s.getScale()), // scale
+                            MathUtils.lerp(Widdow.AP_MIN, Widdow.AP_MAX, s.getScale()), // ap
+                            MathUtils.lerp(Widdow.HP_MIN, Widdow.HP_MAX, s.getScale()), // hp
+                            s.getX(), s.getY()));
+                }
             }
 
 
@@ -243,8 +252,8 @@ public class GameController extends ScreenAdapter {
             Creature enemy = enemies.get(i);
 
             // update if not dead
+            enemy.updateAnimations(delta);
             if (!enemy.isDead()) {
-                enemy.updateAnimations(delta);
                 enemy.updatePosition(delta);
 
                 if (enemy.hasAttacked() && enemy.getSkeletonBounds().aabbIntersectsSkeleton(player.getSkeletonBounds())) {
@@ -324,7 +333,7 @@ public class GameController extends ScreenAdapter {
         // fade out
         if (player.isDead()) {
             gameoverTimer += delta;
-            if(gameoverTimer >= 5 && Gdx.input.isTouched()){
+            if (gameoverTimer >= 5 && Gdx.input.isTouched()) {
                 game.setScreen(game.mainMenu);
                 gameoverTimer = 0;
             }

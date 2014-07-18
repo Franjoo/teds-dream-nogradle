@@ -4,6 +4,7 @@ import com.angrynerds.tedsdream.ai.statemachine.Activities;
 import com.angrynerds.tedsdream.ai.statemachine.Activity;
 import com.angrynerds.tedsdream.ai.statemachine.FSM;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 
 /**
  * Author: Franz Benthin
@@ -30,6 +31,7 @@ public class Spider extends Creature {
         mixAnimations();
     }
 
+
     public static Spider create(TextureAtlas atlas) {
 
         float size = (float) Math.random();
@@ -49,6 +51,7 @@ public class Spider extends Creature {
         Activity<Creature> ac_hide = new Activities.HideFromPlayer(this, getHP() * 0.3f);
         Activity<Creature> ac_waitForPlayer = new Activities.WaitForPlayer(this);
 
+
         ac_waitForPlayer.getNeighbors().add(ac_runToPlayer);
         ac_runToPlayer.getNeighbors().add(ac_attackPlayer);
         ac_runToPlayer.getNeighbors().add(ac_hide);
@@ -67,7 +70,17 @@ public class Spider extends Creature {
 
     @Override
     public float getSpeed(Move speed) {
-        return super.getSpeed(speed);
+        switch (speed) {
+            case WALK:
+                return MathUtils.lerp(120, 60, scale);
+            case RUN:
+                return MathUtils.lerp(400, 100, scale);
+            case HIDE:
+                return MathUtils.lerp(240, 120, scale);
+
+        }
+
+        return 0;
     }
 
     public float getScale() {
