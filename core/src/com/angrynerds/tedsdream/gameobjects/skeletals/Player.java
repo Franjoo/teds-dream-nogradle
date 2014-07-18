@@ -282,16 +282,16 @@ public class Player extends Creature {
 
         if (current.equals("move") || current.equals("idle")) {
             if (input.getState() == States.Animation.JUMP && !current.equals("jump")) {
-                double i =  Math.random();
+                //double i =  Math.random();
 
                 state.setAnimation(0, "jump", false);
                 state.addAnimation(0, "idle", true, 0);
                 sound_walk.stop();
 
-                if(i <= 0.5)
+                //if(i <= 0.5)
                     jump.play();
-                else
-                   jump2.play();
+              //  else
+                 //  jump2.play();
                 //            state.addAnimation(1, "move", true, jumpAnimation.getDuration() - 30);
                 //            state.addAnimation(1, "move", false, 0);
             }
